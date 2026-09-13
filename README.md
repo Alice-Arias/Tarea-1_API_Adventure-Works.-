@@ -2,7 +2,7 @@
 
 # Instituto Tecnológico de Costa Rica
 
-## Escuela de Computación - Bases de Datos II 
+# Escuela de Computación - Bases de Datos II 
 
 ### Tarea #1 API con SQL Server
 
