@@ -1,30 +1,20 @@
-<div align="center">
-
 # Instituto Tecnológico de Costa Rica
 
-## Escuela de Computación - Bases de Datos II 
+## Escuela de Computación
 
-### Tarea #1 API con SQL Server
+### Bases de Datos II
 
-<br>
+# Tarea #1 API con SQL Server
 
-**Estudiante:** Alice Arias Salazar
-
-**Carné:** 2023104639
+**Estudiante:** Alice Arias Salazar | 2023104639
 
 **Profesor:** Cristian Paz Campos Agüero
 
 **Grupo:** 60
 
-**Entrega:** 18 de septiembre de 2026 · **II Semestre 2026**
+**Entrega:** 18 de septiembre 2026
 
-<br>
-
----
-
-🔗 **Repositorio:** [Tarea-1_API_Adventure-Works](https://github.com/Alice-Arias/Tarea-1_API_Adventure-Works.-.git)
-
-</div>
+**II Semestre 2026**
 
 ---
 
@@ -32,29 +22,29 @@ Para la realización del proyecto se hará uso de **WSL (Windows Subsystem for L
 
 # Instalación y configuración de WSL y Ubuntu
 
-## Paso 1. Abrir PowerShell como administrador
+## Paso 1: Abrir PowerShell como administrador
 
-Primero, se debe abrir PowerShell o Terminal de Windows con **permisos de administrador**, ya que estos permisos son necesarios para realizar cambios en el sistema e instalar WSL. Para hacerlo, se debe hacer clic derecho sobre el botón Inicio de Windows y seleccionar "Terminal" o "Windows PowerShell".
+Primero, se debe abrir PowerShell o Terminal de Windows con **permisos de administrador**, ya que estos permisos son necesarios para realizar cambios en el sistema e instalar WSL. Para hacerlo, se debe hacer clic derecho sobre el botón Inicio de Windows y seleccionar “Terminal” o “Windows PowerShell”.
 
 En nuestro caso usaremos PowerShell.
 
 **Elegir 1 opción**
 
-## Paso 2. Instalar WSL por medio de comandos
+## Paso 2: Instalar WSL por medio de comandos
 
 Una vez abierta la Terminal o PowerShell en nuestro caso como administrador, se debe escribir el comando `wsl --install` y presionar Enter. Este comando permite instalar automáticamente WSL, junto con los componentes necesarios para ejecutar Linux en Windows. Durante el proceso también se instalará Ubuntu, que será la distribución de Linux utilizada dentro de WSL. Al finalizar la instalación, puede ser necesario reiniciar el equipo para completar la configuración.
 
-## Paso 3. Instalar Ubuntu
+## Paso 2: Instalar Ubuntu
 
 Después de completar la instalación inicial de WSL, se vuelve a abrir PowerShell como administrador, en caso de que la ventana anterior se haya cerrado. Luego, se ejecuta el comando `wsl --install -d Ubuntu` y se presiona Enter. Después de ejecutar el comando, comenzará la descarga e instalación de Ubuntu. Durante este proceso se puede mostrar el progreso de la instalación en la terminal y el tiempo dependerá de la velocidad de la conexión a Internet y del equipo. No se debe cerrar la ventana mientras el proceso esté en ejecución, sino esperar hasta que la instalación finalice y aparezca un mensaje indicando que se completó correctamente. Esto indica específicamente que se desea instalar Ubuntu como la distribución de Linux que se utilizará dentro de WSL.
 
-## Paso 4. Crear usuario y contraseña de Linux
+## Paso 4 Crear usuario y contraseña de Linux
 
 Una vez finalizada la instalación, Ubuntu solicitará crear un usuario de Linux y una contraseña. El nombre de usuario debe escribirse en **minúsculas, sin espacios y preferiblemente utilizando únicamente letras y números**. Posteriormente, se solicitará crear una contraseña. Al escribirla, **no se mostrará ningún carácter en la pantalla, ni siquiera asteriscos o puntos.** Esto puede dar la impresión de que no se está escribiendo nada, pero sí se está registrando la contraseña. Después de escribirla, se presiona Enter y Ubuntu solicitará confirmarla escribiéndola nuevamente de la misma manera, sin que los caracteres sean visibles. Finalmente, se presiona Enter para completar la creación del usuario.
 
 Estos datos son independientes de la cuenta de Windows y se utilizarán para acceder y trabajar dentro del entorno Ubuntu. Es importante recordar estos datos, ya que la contraseña puede ser necesaria para ejecutar comandos que requieran permisos de administrador dentro de Linux.
 
-## Paso 5. Confirmar que WSL y Ubuntu quedaron instalados
+## Paso 5 Hay que confirmar que WSL y Ubuntu quedaron instalados
 
 Para comprobar que la instalación se realizó correctamente, se debe abrir nuevamente **Terminal o PowerShell** y ejecutar el comando `wsl --list --verbose`, luego presionar **Enter**. Este comando mostrará las distribuciones de Linux instaladas en WSL y su versión.
 
@@ -66,7 +56,7 @@ En la lista debería aparecer **Ubuntu** y, en la columna **VERSION**, debe indi
 
 A partir de este momento, para ingresar nuevamente se puede abrir Terminal o PowerShell y escribir `wsl`, o simplemente buscar Ubuntu desde el menú Inicio. Al abrirlo, se accederá directamente al usuario creado anteriormente.
 
-También es posible acceder desde Ubuntu a los archivos de Windows mediante rutas como `\\wsl$\Ubuntu\home\arias`. No se debe colocar "arias", este sería el nombre de usuario que usted creó para Ubuntu.
+También es posible acceder desde Ubuntu a los archivos de Windows mediante rutas como `\\wsl$\Ubuntu\home\arias`. No se debe colocar “arias” este seria el nombre de usuario que usted creo para Ubuntu.
 
 ## Paso 7. Actualizar Ubuntu
 
@@ -110,7 +100,7 @@ Para comprobar que el usuario pertenece correctamente al grupo de Docker, se eje
 groups
 ```
 
-Este comando muestra todos los grupos a los que pertenece el usuario actual. En la lista debe aparecer "docker", lo que confirma que el usuario tiene los permisos necesarios para utilizar Docker sin tener que escribir "sudo" en cada comando.
+Este comando muestra todos los grupos a los que pertenece el usuario actual. En la lista debe aparecer “Docker”, lo que confirma que el usuario tiene los permisos necesarios para utilizar Docker sin tener que escribir “sudo” en cada comando.
 
 ## Paso 11. Iniciar Docker
 
@@ -130,7 +120,7 @@ El uso de WSL y contenedores permitirá tener un entorno de desarrollo más prá
 
 ## Paso 12. Descargar la imagen de SQL Server
 
-Para instalar el motor de bases de datos SQL Server dentro de la distribución Linux, se utilizará una **imagen oficial de Microsoft mediante Docker**. Para descargarla, se sigue usando la terminal de Ubuntu y se ejecuta el comando:
+Para instalar el motor de bases de datos SQL Server dentro de la distribución Linux, se utilizará una **imagen oficial de Microsoft mediante Docker**. Para descargarla, se sigue usando terminal de Ubuntu y se ejecuta el comando:
 
 ```bash
 docker pull mcr.microsoft.com/mssql/server:2022-latest
@@ -148,11 +138,11 @@ Una vez descargada la imagen de SQL Server, se procederá a crear y ejecutar el 
 docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=TuPassword123!" -p 1433:1433 --name sqlserver --hostname sqlserver -d mcr.microsoft.com/mssql/server:2022-latest
 ```
 
-Esa parte se cambia ya que será la contraseña que tú deseas colocar.
+Esa parte se cambia ya que será la contraseña que tu deseas colocar.
 
 En este comando, `docker run` crea y ejecuta el contenedor utilizando la imagen de SQL Server **descargada anteriormente**. `ACCEPT_EULA=Y` indica que se aceptan los términos de licencia de Microsoft, mientras que `MSSQL_SA_PASSWORD` establece la contraseña del usuario **administrador sa.** La contraseña debe tener como mínimo 8 caracteres e incluir mayúsculas, minúsculas, números y al menos un símbolo.
 
-> **Nota importante:** La contraseña establecida en `MSSQL_SA_PASSWORD` debe guardarse, ya que esta información será necesaria posteriormente para **conectarse desde Visual Studio Code al motor de SQL Server que se encuentra ejecutándose dentro de Ubuntu mediante Docker**. Este paso no se realiza hasta más adelante, pero debemos saber que la información la tenemos que guardar para próximos pasos.
+> **Nota importante:** La contraseña establecida en `MSSQL_SA_PASSWORD` debe guardarse, ya que esta información será necesaria posteriormente para **conectarse desde Visual Studio Code al motor de SQL Server que se encuentra ejecutándose dentro de Ubuntu mediante Docker,** este paso no se ha realizado hasta más delante, pero debemos saber que la información la tenemos que guardar para próximos pasos.
 
 La opción `-p 1433:1433` permite acceder al servidor SQL mediante el puerto 1433, `--name sqlserver` asigna el nombre sqlserver al contenedor y `--hostname sqlserver` establece su nombre de host. Finalmente, `-d` indica que el contenedor se ejecutará en segundo plano, permitiendo continuar utilizando la terminal mientras SQL Server permanece activo.
 
@@ -166,7 +156,7 @@ docker ps
 
 Este comando muestra los contenedores que se encuentran actualmente en ejecución. En la lista debe aparecer una fila correspondiente al contenedor `sqlserver` y, en la columna STATUS, debe mostrarse un estado similar a `Up`, lo que indica que el contenedor está activo y que SQL Server se encuentra ejecutándose correctamente.
 
-Una vez confirmado que el contenedor está activo, se puede verificar que el motor de SQL Server funciona correctamente. Para ello, se ingresa al contenedor utilizando sqlcmd y, cuando aparezca el prompt `1>`, se escribe el SELECT, se presiona Enter y luego se escribe el GO en una línea aparte:
+Una vez confirmado que el contenedor está activo, se puede verificar que el motor de SQL Server funciona correctamente. Para ello, se ingresa al contenedor utilizando sqlcmd y, cuando aparezca el prompt `1>`, se ejecutar pero escrbe el select hace enter y luego el GO no en la misma linea:
 
 ```sql
 SELECT @@VERSION;
@@ -178,7 +168,7 @@ GO
 
 El comando `SELECT @@VERSION;` permite consultar la versión y la información del servidor SQL que se encuentra ejecutándose. Al ejecutar `GO`, se envía la consulta para que SQL Server la procese. Si la instalación fue correcta, se mostrará información indicando que se está utilizando Microsoft SQL Server 2022 (Developer Edition) sobre Linux (Ubuntu).
 
-El mensaje que se mostró en este caso fue:
+El mensaje que se nos mostro en este caso fue:
 
 ```text
 Microsoft SQL Server 2022
@@ -195,7 +185,7 @@ En este punto se confirma que SQL Server está funcionando correctamente dentro 
 exit
 ```
 
-Si de esta manera no puedes salir, realiza `Ctrl + C`.
+si de esta manera no puedes salir realiza `ctrl + c`
 
 De esta manera, se finaliza la comprobación del funcionamiento de SQL Server y se puede continuar con el siguiente proceso.
 
@@ -209,11 +199,11 @@ La base de datos que se instalará en el **servidor SQL es AdventureWorks**, una
 curl -L -o AdventureWorks2022.bak https://github.com/Microsoft/sql-server-samples/releases/download/adventureworks/AdventureWorks2022.bak
 ```
 
-Este comando descarga el archivo `AdventureWorks2022.bak` y lo guarda en el directorio actual de Ubuntu. El archivo corresponde a la versión completa OLTP **(Online Transaction Processing)** de AdventureWorks, que será utilizada posteriormente para restaurar **la base de datos dentro del servidor SQL que se encuentra ejecutándose en el contenedor Docker.**
+Este comando descarga el archivo `AdventureWorks2022.bak` y lo guarda en el directorio actual de Ubuntu. El archivo corresponde a la versión completa OLTP **(Online Transaction Processing) de AdventureWorks**, que será utilizada posteriormente para restaurar **la base de datos dentro del servidor SQL que se encuentra ejecutándose en el contenedor Docker.**
 
 ## Paso 16. Copiar el archivo al contenedor
 
-Una vez descargado el archivo **AdventureWorks2022.bak en Ubuntu**, se debe **copiar dentro del contenedor de SQL Server** para que el motor de bases de datos pueda acceder al respaldo y utilizarlo posteriormente para restaurar la base de datos. Para realizar esta acción, se ejecuta el siguiente comando:
+Una vez descargado el archivo **AdventureWorks2022.bak en Ubuntu,** se debe **copiar dentro del contenedor de SQL Server** para que el motor de bases de datos pueda acceder al respaldo y utilizarlo posteriormente para restaurar la base de datos. Para realizar esta acción, se ejecuta el siguiente comando:
 
 ```bash
 docker cp AdventureWorks2022.bak sqlserver:/var/opt/mssql/data/
@@ -243,7 +233,7 @@ RESTORE FILELISTONLY FROM DISK = '/var/opt/mssql/data/AdventureWorks2022.bak'
 GO
 ```
 
-**Nota:** Es importante colocar GO debajo de la consulta, en una línea separada. GO indica a sqlcmd que debe ejecutar el bloque de instrucciones introducido anteriormente.
+Nota: Es importante colocar GO debajo de la consulta, en una línea separada. GO indica a sqlcmd que debe ejecutar el bloque de instrucciones introducido anteriormente.
 
 El comando RESTORE FILELISTONLY permite consultar la información de los archivos contenidos dentro del backup sin restaurar todavía la base de datos. Entre los datos mostrados se encuentran los nombres lógicos de los archivos de datos y de registro de AdventureWorks. Estos nombres serán necesarios en el siguiente paso para indicar correctamente dónde deben ubicarse los archivos durante la restauración.
 
@@ -255,7 +245,7 @@ Primero, se debe salir de sqlcmd y regresar a la terminal de Ubuntu. Si es neces
 wsl -d Ubuntu
 ```
 
-Una vez en la terminal de Ubuntu, se creará un archivo llamado **restore.sql** que contendrá las **instrucciones necesarias para restaurar la base de datos AdventureWorks2022.** Para crear el archivo, se ejecuta el siguiente bloque completo:
+una vez en la terminal de Ubuntu, se creará un archivo llamado **restore.sql** que contendrá las **instrucciones necesarias para restaurar la base de datos AdventureWorks2022.** Para crear el archivo, se ejecuta el siguiente bloque completo:
 
 ```bash
 cat > restore.sql << 'EOF'
@@ -301,7 +291,7 @@ Inicialmente se había considerado utilizar Azure Data Studio para realizar la c
 
 Por esta razón, se utilizará Visual Studio Code como herramienta principal. La conexión con WSL permitirá que, aunque el programa esté instalado en Windows, pueda trabajar con los archivos, herramientas y servicios que se encuentran dentro de Ubuntu. De esta manera, se podrá acceder posteriormente al SQL Server que está ejecutándose dentro del contenedor Docker y administrar la base de datos AdventureWorks2022 desde Visual Studio Code.
 
-**Nota:** Si Visual Studio Code no estuviera instalado en el equipo, primero se debe descargar e instalar la versión oficial para Windows. En este proyecto no será necesario instalar la versión .deb de Visual Studio Code dentro de Ubuntu, ya que se utilizará la instalación de Windows conectada al entorno WSL. Microsoft recomienda precisamente este esquema para trabajar con WSL.
+Nota: Si Visual Studio Code no estuviera instalado en el equipo, primero se debe descargar e instalar la versión oficial para Windows. En este proyecto no será necesario instalar la versión .deb de Visual Studio Code dentro de Ubuntu, ya que se utilizará la instalación de Windows conectada al entorno WSL. Microsoft recomienda precisamente este esquema para trabajar con WSL.
 
 ## Paso 19. Abrir Visual Studio Code e instalar la extensión WSL
 
@@ -311,7 +301,7 @@ Una vez abierto Visual Studio Code, se debe seleccionar el icono de Extensiones,
 
 Esta extensión permite conectar Visual Studio Code con la distribución de Ubuntu instalada mediante WSL. De esta manera, aunque Visual Studio Code se esté ejecutando en Windows, podrá acceder al entorno de Ubuntu y trabajar directamente con sus archivos, comandos y herramientas.
 
-**Nota:** Si al intentar conectar Visual Studio Code con WSL se presenta algún error, se puede intentar la conexión nuevamente. Para ello, se presiona **Ctrl + Shift + P** para abrir la paleta de comandos, se escribe **WSL: Connect to WSL** y se selecciona esta opción nuevamente.
+Nota: Si al intentar conectar Visual Studio Code con WSL se presenta algún error, se puede intentar la conexión nuevamente. Para ello, se presiona **Ctrl + Shift + P** para abrir la paleta de comandos, se **escribe WSL: Connect to WSL** y se selecciona esta opción nuevamente.
 
 Si el error continúa, se recomienda cerrar Visual Studio Code por completo, utilizando la X de la ventana y no solamente cerrando la pestaña. Luego, se vuelve a abrir Visual Studio Code desde el menú Inicio de Windows y se intenta nuevamente la conexión con WSL. En algunos casos, la extensión puede requerir un reinicio completo del programa durante su primera configuración.
 
@@ -321,9 +311,9 @@ Se debe esperar a que el proceso finalice. Durante la instalación puede aparece
 
 **Nota:** No se debe cerrar Visual Studio Code ni interrumpir el proceso mientras se descarga e instala VS Code Server. Este proceso es necesario para que Visual Studio Code pueda trabajar directamente dentro del entorno Linux de Ubuntu.
 
-Una vez finalizada la instalación de VS Code Server, Visual Studio Code quedará conectado al entorno de Ubuntu mediante WSL. Para comprobar que la conexión se realizó correctamente, se debe observar la esquina inferior izquierda de Visual Studio Code. Allí aparecerá la indicación "WSL: Ubuntu", lo que confirma que Visual Studio Code está trabajando directamente sobre la distribución Ubuntu instalada mediante WSL. Además, puede aparecer un mensaje indicando que se encuentra conectado de forma remota. Esto significa que, aunque Visual Studio Code se está ejecutando en Windows, ahora puede acceder y trabajar directamente con los archivos, herramientas y servicios del entorno Linux.
+Una vez finalizada la instalación de VS Code Server, Visual Studio Code quedará conectado al entorno de Ubuntu mediante WSL. Para comprobar que la conexión se realizó correctamente, se debe observar la esquina inferior izquierda de Visual Studio Code. Allí aparecerá la indicación “WSL: Ubuntu”, lo que confirma que Visual Studio Code está trabajando directamente sobre la distribución Ubuntu instalada mediante WSL. Además, puede aparecer un mensaje indicando que se encuentra conectado de forma remota. Esto significa que, aunque Visual Studio Code se está ejecutando en Windows, ahora puede acceder y trabajar directamente con los archivos, herramientas y servicios del entorno Linux.
 
-Cuando aparezca "WSL: Ubuntu" en la esquina inferior izquierda, la conexión se considera establecida correctamente y se puede continuar con la configuración de SQL Server en Visual Studio Code.
+Cuando aparezca “WSL: Ubuntu” en la esquina inferior izquierda, la conexión se considera establecida correctamente y se puede continuar con la configuración de SQL Server en Visual Studio Code.
 
 # Configuración de SQL Server en Visual Studio Code
 
@@ -335,11 +325,11 @@ Para instalarla, se debe seleccionar el icono de Extensiones, representado por c
 
 Una vez localizada, se presiona Instalar y se espera a que finalice el proceso. Al terminar, Visual Studio Code contará con las herramientas necesarias para establecer posteriormente la conexión con el servidor de SQL Server que se encuentra ejecutándose dentro del contenedor Docker.
 
-**Nota:** Es importante instalar la extensión mientras se está trabajando en la ventana de Visual Studio Code conectada a WSL: Ubuntu, ya que el proyecto se está ejecutando dentro de ese entorno.
+Nota: Es importante instalar la extensión mientras se está trabajando en la ventana de Visual Studio Code conectada a WSL: Ubuntu, ya que el proyecto se está ejecutando dentro de ese entorno.
 
 ## Paso 21. Solucionar el error de la extensión MSSQL
 
-Al instalar y **utilizar por primera vez la extensión MSSQL en Ubuntu mediante WSL**, puede presentarse un error relacionado con una librería que necesita el servicio interno de **MSSQL para funcionar correctamente en Linux**. Una de las librerías que puede requerirse es ICU, utilizada por .NET para funciones de internacionalización.
+Al instalar y **utilizar por primera vez la extensión MSSQL en Ubuntu mediante WSL,** puede presentarse un error relacionado con una librería que necesita el servicio interno de **MSSQL para funcionar correctamente en Linux**. Una de las librerías que puede requerirse es ICU, utilizada por .NET para funciones de internacionalización.
 
 Para solucionar este problema, se debe utilizar la terminal integrada de Visual Studio Code, ubicada en la parte inferior de la ventana. En esta terminal se ejecuta únicamente el siguiente comando:
 
@@ -351,7 +341,7 @@ Este comando actualiza la información de los paquetes disponibles en Ubuntu y p
 
 Al ejecutar el comando, Ubuntu puede solicitar la **contraseña del usuario**. Se debe escribir la contraseña utilizada para ingresar al usuario de Ubuntu y presionar Enter. Mientras se escribe la contraseña, no aparecerán caracteres en la pantalla; esto es normal.
 
-Una vez finalizada la instalación correctamente, se debe **recargar** Visual Studio Code para que la extensión MSSQL vuelva a iniciar sus servicios. Para hacerlo, se presiona **Ctrl + Shift + P**, se escribe **Reload Window** y se presiona **Enter**. Visual Studio Code se recargará automáticamente.
+Una vez finalizada la instalación correctamente, se debe **recargar** Visual Studio Code para que la extensión MSSQL vuelva a iniciar sus servicios. Para hacerlo, se presiona **Ctrl + Shift + P, se escribe Reload Window** y se presiona **Enter.** Visual Studio Code se recargará automáticamente.
 
 Después de recargar la ventana, se debe abrir el panel de MSSQL seleccionando el nuevo icono relacionado con SQL Server, ubicado en la barra lateral izquierda de Visual Studio Code. Al hacer clic sobre este icono, se podrá acceder al panel desde el cual posteriormente se realizará la conexión con el servidor de SQL Server que se encuentra ejecutándose dentro del contenedor Docker.
 
@@ -361,12 +351,17 @@ Una vez solucionado el problema del servicio de MSSQL y abierto el panel de SQL 
 
 Al seleccionar la opción para crear una nueva conexión, aparecerá un formulario con los datos necesarios para conectarse al servidor. Se debe completar de la siguiente manera:
 
-- **Nombre del servidor:** localhost
-- **Puerto:** 1433
-- **Certificado de servidor de confianza:** marcar el checkbox
-- **Tipo de autenticación:** Inicio de sesión de SQL
-- **Nombre de usuario:** sa
-- **Contraseña:** utilizar la misma contraseña establecida anteriormente mediante MSSQL_SA_PASSWORD al crear el contenedor.
+**Nombre del servidor:** localhost
+
+**Puerto:** 1433
+
+**Certificado de servidor de confianza:** marcar el checkbox
+
+**Tipo de autenticación:** Inicio de sesión de SQL
+
+**Nombre de usuario:** sa
+
+**Contraseña:** utilizar la misma contraseña establecida anteriormente mediante MSSQL_SA_PASSWORD al crear el contenedor.
 
 La opción Certificado de servidor de confianza debe quedar activada, ya que de lo contrario la conexión puede presentar un error relacionado con el certificado del servidor. Una vez completados los datos, se debe seleccionar Conectar.
 
@@ -410,9 +405,9 @@ Si aparece sqlserver con un estado similar a Up, el contenedor está funcionando
 
 Se recomienda esperar aproximadamente 10 a 15 segundos después de iniciarlo para permitir que SQL Server termine de inicializarse completamente. Luego se puede regresar al panel de MSSQL en Visual Studio Code e intentar nuevamente la conexión utilizando los mismos datos.
 
-Cuando la conexión sea exitosa, en el panel de MSSQL aparecerá el servidor conectado, por ejemplo `localhost, <default> (sa)`. Debajo se mostrarán diferentes opciones, entre ellas Bases de datos, Seguridad y Objetos de servidor.
+Cuando la conexión sea exitosa, en el panel de MSSQL aparecerá el servidor conectado, por ejemplo localhost, <default> (sa). Debajo se mostrarán diferentes opciones, entre ellas Bases de datos, Seguridad y Objetos de servidor.
 
-Para comprobar que la restauración de la base de datos se realizó correctamente, se debe seleccionar la flecha `>` ubicada junto a Bases de datos. Allí deberá aparecer AdventureWorks2022; se puede expandir AdventureWorks2022 y seleccionar la carpeta Tables para visualizar las tablas que contiene la base de datos.
+Para comprobar que la restauración de la base de datos se realizó correctamente, se debe seleccionar la flecha > ubicada junto a Bases de datos. Allí deberá aparecer AdventureWorks2022 se puede expandir AdventureWorks2022 y seleccionar la carpeta Tables para visualizar las tablas que contiene la base de datos.
 
 Esto confirma que Visual Studio Code está conectado correctamente al SQL Server que se ejecuta dentro del contenedor Docker y que la base de datos AdventureWorks2022 está disponible para trabajar con ella.
 
@@ -434,7 +429,7 @@ git --version
 
 Este comando muestra la versión de Git instalada en el sistema.
 
-**Nota:** Si aparece un mensaje indicando que git no se encuentra instalado, primero será necesario instalarlo antes de continuar con el siguiente paso.
+Nota: Si aparece un mensaje indicando que git no se encuentra instalado, primero será necesario instalarlo antes de continuar con el siguiente paso.
 
 ## Paso 24. Ubicarse en la carpeta Home de Ubuntu
 
@@ -454,7 +449,7 @@ Desde la carpeta Home se debe clonar el repositorio plantilla proporcionado para
 git clone https://github.com/Bases-de-Datos-2/Proyectos.git adventureworks-api
 ```
 
-El comando `git clone` descarga una copia del repositorio desde GitHub. En este caso, se utiliza el repositorio `https://github.com/Bases-de-Datos-2/Proyectos` y se indica `adventureworks-api` al final para que la copia descargada se almacene dentro de una carpeta con ese nombre.
+El comando `git clone` descarga una copia del repositorio desde GitHub. En este caso, se utiliza el repositorio: https://github.com/Bases-de-Datos-2/Proyectos y se indica adventureworks-api al final para que la copia descargada se almacene dentro de una carpeta con ese nombre.
 
 Al finalizar, se tendrá una nueva carpeta llamada adventureworks-api, que contendrá el contenido del repositorio proporcionado por el profesor.
 
@@ -482,7 +477,7 @@ Luego:
 
 1. Seleccionar el símbolo **+** ubicado en la esquina superior derecha.
 2. Seleccionar **New repository**.
-3. Escribir el nombre del repositorio, por ejemplo: **adventureworks-api**.
+3. Escribir el nombre del repositorio, por ejemplo: **adventureworks-api.**
 4. Seleccionar **Public**, si así lo requiere la entrega.
 5. No seleccionar las opciones para agregar README, `.gitignore` ni License.
 6. Seleccionar **Create repository**.
@@ -499,7 +494,7 @@ https://github.com/TU-USUARIO/adventureworks-api.git
 
 Se debe copiar la URL correspondiente al repositorio personal.
 
-**Nota:** TU-USUARIO es solamente un ejemplo. Se debe utilizar el nombre de usuario real de la cuenta de GitHub.
+Nota: TU-USUARIO es solamente un ejemplo. Se debe utilizar el nombre de usuario real de la cuenta de GitHub.
 
 Se debe regresar a la terminal de Visual Studio Code y verificar que todavía se encuentre dentro de la carpeta adventureworks-api. Luego se agrega el repositorio personal como nuevo origen:
 
@@ -509,7 +504,7 @@ git remote add origin https://github.com/TU-USUARIO/adventureworks-api.git
 
 Se debe reemplazar TU-USUARIO por el usuario real de GitHub y utilizar con exactitud la URL copiada anteriormente.
 
-Por último, se prepara la rama principal y se sube el contenido al repositorio personal:
+Pr último se prepara la rama principal y se sube el contenido al repositorio personal:
 
 ```bash
 git branch -M main
