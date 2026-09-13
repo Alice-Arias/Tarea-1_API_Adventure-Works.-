@@ -147,3 +147,46 @@ ORDER BY ProductID DESC;
 GO
 
 -----------------------------------------------------------------------------------------------
+--READ: Este procedimiento genera un reporte de empleados utilizando las tablas Person.Person y 
+--HumanResources.Employee. Las relaciona mediante BusinessEntityID, muestra el nombre completo, 
+--tipo de persona, puesto y estado del empleado, además de numerar y contabilizar los registros.
+
+SELECT TOP 10 *FROM Person.Person;
+
+SELECT TOP 10 *FROM HumanResources.Employee;
+
+CREATE PROCEDURE dbo.sp_ReportePersonas
+AS
+BEGIN
+    SELECT TOP 20  P.BusinessEntityID AS ID,
+        CONCAT(  P.FirstName,  ' ',  ISNULL(P.MiddleName + ' ', ''),   P.LastName ) AS NombreCompleto,
+        CASE P.PersonType
+            WHEN 'EM' THEN 'Empleado'
+            WHEN 'SC' THEN 'Contacto de tienda'
+            WHEN 'IN' THEN 'Cliente individual'
+            WHEN 'SP' THEN 'Vendedor'
+            WHEN 'VC' THEN 'Contacto de proveedor'
+            WHEN 'GC' THEN 'Contacto general'
+            ELSE 'Otro'
+        END AS TipoPersona,
+
+        ISNULL(E.JobTitle, 'No aplica') AS Puesto,
+
+        CASE
+            WHEN E.BusinessEntityID IS NOT NULL THEN 'Empleado activo'
+            ELSE 'No es empleado'
+        END AS EstadoEmpleado,
+
+        COUNT(*) OVER() AS TotalPersonas,
+
+        ROW_NUMBER() OVER( ORDER BY P.LastName, P.FirstName ) AS NumeroRegistro
+
+    FROM Person.Person AS P
+    INNER JOIN HumanResources.Employee AS E ON P.BusinessEntityID = E.BusinessEntityID
+    ORDER BY P.LastName, P.FirstName;
+END;
+GO
+
+EXEC dbo.sp_ReportePersonas;
+GO
+
