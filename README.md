@@ -2,13 +2,14 @@
 
 # Instituto Tecnológico de Costa Rica
 
-## Escuela de Computación
+## Escuela de Computación - Bases de Datos II 
 
-### Bases de Datos II - Tarea #1 — API con SQL Server
+### Tarea #1 API con SQL Server
 
 <br>
 
 **Estudiante:** Alice Arias Salazar
+
 **Carné:** 2023104639
 
 **Profesor:** Cristian Paz Campos Agüero
