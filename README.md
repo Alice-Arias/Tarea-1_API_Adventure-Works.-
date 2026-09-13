@@ -1,24 +1,32 @@
-# Instituto Tecnológico de Costa Rica
+<div align="center">
 
-## Escuela de Computación
+### Instituto Tecnológico de Costa Rica
+#### Escuela de Computación
+#### Bases de Datos II
 
-### Bases de Datos II
+# Tarea #1 — API con SQL Server
 
-# Tarea #1 API con SQL Server
+<br>
 
-**Estudiante:** Alice Arias Salazar | 2023104639
+**Estudiante:** Alice Arias Salazar
+**Carné:** 2023104639
 
 **Profesor:** Cristian Paz Campos Agüero
 
 **Grupo:** 60
 
-**Entrega:** 18 de septiembre 2026
+**Entrega:** 18 de septiembre de 2026 · **II Semestre 2026**
 
-**II Semestre 2026**
-
-**Enlace del Repositorio: https://github.com/Alice-Arias/Tarea-1_API_Adventure-Works.-.git**
+<br>
 
 ---
+
+🔗 **Repositorio:** [Tarea-1_API_Adventure-Works](https://github.com/Alice-Arias/Tarea-1_API_Adventure-Works.-.git)
+
+</div>
+
+---
+
 Para la realización del proyecto se hará uso de **WSL (Windows Subsystem for Linux)**, ya que permite trabajar con un entorno Linux directamente desde Windows sin necesidad de utilizar una máquina virtual tradicional. Esto facilita el acceso a herramientas y comandos propios de Linux, manteniendo al mismo tiempo el sistema operativo Windows como entorno principal.
 
 # Instalación y configuración de WSL y Ubuntu
