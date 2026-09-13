@@ -1,10 +1,10 @@
 <div align="center">
 
-### Instituto Tecnológico de Costa Rica
-#### Escuela de Computación
-#### Bases de Datos II
+# Instituto Tecnológico de Costa Rica
 
-# Tarea #1 — API con SQL Server
+## Escuela de Computación
+
+### Bases de Datos II - Tarea #1 — API con SQL Server
 
 <br>
 
