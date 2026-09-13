@@ -1,10 +1,10 @@
 # Instituto Tecnológico de Costa Rica
 
-## Escuela de Computación
+**Escuela de Computación**
 
-### Bases de Datos II
+**Bases de Datos II**
 
-# Tarea #1 API con SQL Server
+**Tarea #1**  API con SQL Server
 
 **Estudiante:** Alice Arias Salazar | 2023104639
 
@@ -162,7 +162,7 @@ Una vez confirmado que el contenedor está activo, se puede verificar que el mot
 SELECT @@VERSION;
 ```
 
-```text
+```sql
 GO
 ```
 
@@ -229,7 +229,7 @@ Una vez dentro de sqlcmd, aparecerá el prompt `1>`. En este punto, se ejecuta l
 RESTORE FILELISTONLY FROM DISK = '/var/opt/mssql/data/AdventureWorks2022.bak'
 ```
 
-```text
+```sql
 GO
 ```
 
@@ -386,7 +386,7 @@ docker ps -a
 A diferencia de docker ps, este comando muestra todos los contenedores, incluyendo aquellos que se encuentran detenidos. Si aparece sqlserver con un estado similar a:
 
 ```text
-Exited (255)
+Exited 
 ```
 
 significa que el contenedor existe, pero actualmente está detenido. En este caso, no es necesario crear otro **contenedor ni volver a instalar SQL Server**. Simplemente se debe iniciarlo nuevamente con:
