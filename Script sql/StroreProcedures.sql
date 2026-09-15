@@ -1,170 +1,217 @@
-use AdventureWorks2022;
+USE AdventureWorks2022;
+GO
 
---Insertar: Registrar un departamento nuevo
-create procedure sp_InsertarDepartamento
-    @Nombre nvarchar(40),@Grupo nvarchar(40)
-as 
-begin 
+-----------------------------------------------------------------------------------
+-- INSERTAR: Registrar un departamento nuevo
+-----------------------------------------------------------------------------------
+CREATE PROCEDURE sp_InsertarDepartamento
+    @Nombre NVARCHAR(40),
+    @Grupo  NVARCHAR(40)
+AS
+BEGIN
 
-    if (@Nombre is null) or (@Grupo is null)
-    begin 
-        print 'Error:  El nombre y el grupo son obligatorios.'; 
-    return;
-    end;
+    IF (@Nombre IS NULL) OR (@Grupo IS NULL)
+    BEGIN
+        PRINT 'Error: El nombre y el grupo son obligatorios.';
+        RETURN;
+    END;
 
-    if exists (select top 1 from HumanResources.Department where Name = @Nombre)
-    begin 
-        print 'Error: Departamento ya existe';
-        return;
-    end;
+    IF EXISTS (SELECT 1 FROM HumanResources.Department WHERE Name = @Nombre)
+    BEGIN
+        PRINT 'Error: Departamento ya existe';
+        RETURN;
+    END;
 
-    insert into  HumanResources.Department (Name,GroupName) values (  @Nombre, @Grupo);
-    print 'Departamento registrado correctamente.';
+    INSERT INTO HumanResources.Department (Name, GroupName)
+    VALUES (@Nombre, @Grupo);
 
-end;
+    PRINT 'Departamento registrado correctamente.';
 
-exec sp_InsertarDepartamento
+END;
+GO
+EXEC sp_helptext 'dbo.sp_ActualizarCantidadInventarioUbicacion';
+GO
+EXEC sp_InsertarDepartamento
     @Nombre = 'Tecnologia',
     @Grupo = 'Administracion';
+GO
 
---Actualizar:  actualiza la cantidad disponible de un producto en una ubicacion
-create procedure sp_ActualizarCantidadInventarioUbicacion
-    @ProductID int, @LocationID smallint, @NuevaCantidad smallint
-as
-begin 
 
-    if not exists ( select 1  from Production.ProductInventory where ProductID = @ProductID and LocationID = @LocationID  )
-    begin 
-        print 'Error: El producto no existe en esa ubicación.';
-        return;
-    end;
+-----------------------------------------------------------------------------------
+-- ACTUALIZAR: actualiza la cantidad disponible de un producto en una ubicacion
+-----------------------------------------------------------------------------------
+CREATE PROCEDURE sp_ActualizarCantidadInventarioUbicacion
+    @ProductID     INT,
+    @LocationID    SMALLINT,
+    @NuevaCantidad SMALLINT
+AS
+BEGIN
 
-    if @NuevaCantidad < 0 
-    begin 
-        print 'Error: Cantidad no puede ser negativa'
-        return;
-    end;
+    IF NOT EXISTS (
+        SELECT 1
+        FROM Production.ProductInventory
+        WHERE ProductID = @ProductID AND LocationID = @LocationID
+    )
+    BEGIN
+        PRINT 'Error: El producto no existe en esa ubicación.';
+        RETURN;
+    END;
 
-    update Production.ProductInventory
-    set Quantity = @NuevaCantidad,
+    IF @NuevaCantidad < 0
+    BEGIN
+        PRINT 'Error: Cantidad no puede ser negativa';
+        RETURN;
+    END;
+
+    UPDATE Production.ProductInventory
+    SET Quantity = @NuevaCantidad,
         ModifiedDate = GETDATE()
-    where ProductID = @ProductID and  LocationID = @LocationID;
+    WHERE ProductID = @ProductID AND LocationID = @LocationID;
 
-    print 'Cantidad actualizada correctamente.'
+    PRINT 'Cantidad actualizada correctamente.';
 
-end;
+END;
+GO
 
-exec dbo.sp_ActualizarCantidadInventario
+EXEC sp_ActualizarCantidadInventarioUbicacion
     @ProductID = 1,
     @LocationID = 1,
     @NuevaCantidad = 100;
-
---DELETE: Eliminamos un departamentoque no tenga empleados solo
-create procedure sp_eliminardepartamento
-    @nombre nvarchar(50)
-as
-begin
-
-    if not exists ( select 1 from humanresources.department where name = @nombre )
-    begin
-        print 'el departamento no existe.';
-        return;
-    end;
-
-    if exists ( select 1
-                 from humanresources.employeedepartmenthistory as edh
-                inner join humanresources.department as d on edh.departmentid = d.departmentid
-                where d.name = @nombre
-             )
-    begin
-        print 'no se puede eliminar: el departamento tiene registros asociados.';
-        return;
-    end;
+GO
 
 
-    delete from humanresources.department
-    where name = @nombre;
-    print 'departamento eliminado correctamente.';
-end;
+-----------------------------------------------------------------------------------
+-- DELETE: Eliminamos un departamento que no tenga empleados asociados
+-----------------------------------------------------------------------------------
+CREATE PROCEDURE sp_EliminarDepartamento
+    @Nombre NVARCHAR(50)
+AS
+BEGIN
+
+    IF NOT EXISTS (SELECT 1 FROM HumanResources.Department WHERE Name = @Nombre)
+    BEGIN
+        PRINT 'El departamento no existe.';
+        RETURN;
+    END;
+
+    IF EXISTS (
+        SELECT 1
+        FROM HumanResources.EmployeeDepartmentHistory AS EDH
+        INNER JOIN HumanResources.Department AS D ON EDH.DepartmentID = D.DepartmentID
+        WHERE D.Name = @Nombre
+    )
+    BEGIN
+        PRINT 'No se puede eliminar: el departamento tiene registros asociados.';
+        RETURN;
+    END;
+
+    DELETE FROM HumanResources.Department
+    WHERE Name = @Nombre;
+
+    PRINT 'Departamento eliminado correctamente.';
+
+END;
+GO
+
+EXEC sp_EliminarDepartamento
+    @Nombre = 'Tecnologia';
+GO
 
 
-exec sp_eliminardepartamento
-    @nombre = 'tecnologia';
+-----------------------------------------------------------------------------------
+-- SELECT (con JOIN): diferencias en Work Order por producto
+-----------------------------------------------------------------------------------
+CREATE PROCEDURE sp_ConsultarWorkOrder
+AS
+BEGIN
+
+    SELECT
+        CASE
+            WHEN GROUPING(P.Name) = 1 THEN 'TOTAL GENERAL'
+            ELSE P.Name
+        END AS Producto,
+        SUM(W.OrderQty)    AS Cantidad_Solicitada,
+        SUM(W.StockedQty)  AS Cantidad_Almacenada,
+        SUM(W.ScrappedQty) AS Cantidad_Rechazada
+    FROM Production.WorkOrder AS W
+    INNER JOIN Production.Product AS P ON W.ProductID = P.ProductID
+    GROUP BY ROLLUP(P.Name)
+    ORDER BY GROUPING(P.Name), SUM(W.OrderQty - W.StockedQty) ASC;
+
+END;
+GO
+
+EXEC sp_ConsultarWorkOrder;
+GO
 
 
--- select: consultar diferencias en work order
-create procedure sp_consultarworkorder
-as
-begin
+-----------------------------------------------------------------------------------
+-- SELECT (una tabla): cantidad de clientes por territorio
+-----------------------------------------------------------------------------------
+CREATE PROCEDURE sp_BuscarClientesPorTerritorio
+    @TerritoryID INT
+AS
+BEGIN
 
-    select
-        case
-            when grouping(p.name) = 1 then 'total general'
-            else p.name 
-        end as producto,
-        sum(w.orderqty) as cantidad_solicitada,
-        sum(w.stockedqty) as cantidad_almacenada,
-        sum(w.scrappedqty) as cantidad_rechazada
-    from production.workorder as w
-    inner join production.product as p on w.productid = p.productid
-    group by rollup(p.name)
-    order by grouping(p.name),sum(w.orderqty - w.stockedqty) asc;
-end
+    SELECT
+        TerritoryID AS Territorio,
+        COUNT(DISTINCT CustomerID) AS Cantidad_De_Clientes
+    FROM Sales.Customer
+    WHERE TerritoryID = @TerritoryID
+    GROUP BY TerritoryID;
 
-exec sp_consultarworkorder;
+END;
+GO
 
+EXEC sp_BuscarClientesPorTerritorio
+    @TerritoryID = 1;
+GO
 
---bUsqueda - cantidad de clientes por territorio
-create procedure sp_buscarclientesporterritorio
-    @territoryid int
-as
-begin
+USE AdventureWorks2022;
+GO
 
-    select  territoryid as territorio,
-          count(DISTINCT customerid) as cantidad_de_clientes
-    from sales.customer
-    where territoryid = @territoryid
-    group by territoryid;
-end;
+SELECT
+    SCHEMA_NAME(schema_id) AS Esquema,
+    name AS Procedimiento
+FROM sys.procedures
+WHERE name LIKE 'sp_ActualizarCantidadInventario%';
+-----------------------------------------------------------------------------------
+-- SELECT (con 2 JOIN): personas por tipo
+-----------------------------------------------------------------------------------
+CREATE PROCEDURE sp_BuscarPersonasPorTipo
+    @TipoPersona VARCHAR(30)
+AS
+BEGIN
+    SELECT
+        P.BusinessEntityID AS Identificador,
+        CONCAT(P.FirstName, ' ', ISNULL(P.MiddleName + ' ', ''), P.LastName) AS Nombre_Completo,
+        CASE
+            WHEN P.PersonType = 'EM' THEN 'empleado'
+            WHEN P.PersonType = 'SC' THEN 'contacto de tienda'
+            WHEN P.PersonType = 'IN' THEN 'persona individual'
+            WHEN P.PersonType = 'SP' THEN 'vendedor'
+            WHEN P.PersonType = 'VC' THEN 'contacto de proveedor'
+            WHEN P.PersonType = 'GC' THEN 'contacto general'
+        END AS Tipo_Persona,
+        E.EmailAddress AS Correo,
+        PH.PhoneNumber AS Telefono
+    FROM Person.Person AS P
+    INNER JOIN Person.EmailAddress AS E ON P.BusinessEntityID = E.BusinessEntityID
+    INNER JOIN Person.PersonPhone AS PH ON P.BusinessEntityID = PH.BusinessEntityID
+    WHERE
+        CASE
+            WHEN P.PersonType = 'EM' THEN 'empleado'
+            WHEN P.PersonType = 'SC' THEN 'contacto de tienda'
+            WHEN P.PersonType = 'IN' THEN 'persona individual'
+            WHEN P.PersonType = 'SP' THEN 'vendedor'
+            WHEN P.PersonType = 'VC' THEN 'contacto de proveedor'
+            WHEN P.PersonType = 'GC' THEN 'contacto general'
+        END = @TipoPersona
+    ORDER BY P.LastName, P.FirstName;
 
-exec sp_buscarclientesporterritorio
-    @territoryid = 1;
+END;
+GO
 
-
--- busqueda con 2 join - personas por tipo
-create procedure sp_buscarpersonasportipo
-    @tipopersona varchar(30)
-as
-begin
-    select  p.businessentityid as identificador,
-        concat( p.firstname,  ' ', isnull(p.middlename + ' ', ''), p.lastname ) as nombre_completo,
-        case
-            when p.persontype = 'EM' then 'empleado'
-            when p.persontype = 'SC' then 'contacto de tienda'
-            when p.persontype = 'IN' then 'persona individual'
-            when p.persontype = 'SP' then 'vendedor'
-            when p.persontype = 'VC' then 'contacto de proveedor'
-            when p.persontype = 'GC' then 'contacto general'
-        end as tipo_persona, 
-
-        e.emailaddress as correo,
-        ph.phonenumber as telefono
-    from person.person as p
-    inner join person.emailaddress as e on p.businessentityid = e.businessentityid
-    inner join person.personphone as ph on p.businessentityid = ph.businessentityid
-    where
-        case
-            when p.persontype = 'EM' then 'empleado'
-            when p.persontype = 'SC' then 'contacto de tienda'
-            when p.persontype = 'IN' then 'persona individual'
-            when p.persontype = 'SP' then 'vendedor'
-            when p.persontype = 'VC' then 'contacto de proveedor'
-            when p.persontype = 'GC' then 'contacto general'
-        end = @tipopersona
-    order by  p.lastname, p.firstname;
-
-end;
-
-
-exec sp_buscarpersonasportipo
-    @tipopersona = 'Empleado';
+EXEC sp_BuscarPersonasPorTipo
+    @TipoPersona = 'empleado';
+GO
