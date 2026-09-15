@@ -1,192 +1,170 @@
-USE AdventureWorks2022;
-GO
+use AdventureWorks2022;
 
------------------------------------------------------------------------------------------------
---INSERTAR: Procedimiento que permite registrar nuevos productos en la base de datos, validando que los 
---datos sean correctos, que el producto no exista y que cumpla con las reglas establecidas por la empresa.
-CREATE PROCEDURE dbo.sp_InsertarProducto
-    @Nombre NVARCHAR(50),
-    @NumeroProducto NVARCHAR(25),
-    @Color NVARCHAR(15),
-    @StockSeguridad SMALLINT,
-    @PuntoReorden SMALLINT,
-    @CostoEstandar MONEY,
-    @PrecioVenta MONEY,
-    @DiasFabricacion INT,
-    @FechaInicioVenta DATETIME
-AS
-BEGIN
+--Insertar: Registrar un departamento nuevo
+create procedure sp_InsertarDepartamento
+    @Nombre nvarchar(40),@Grupo nvarchar(40)
+as 
+begin 
 
-    SET NOCOUNT ON;
+    if (@Nombre is null) or (@Grupo is null)
+    begin 
+        print 'Error:  El nombre y el grupo son obligatorios.'; 
+    return;
+    end;
 
-    -- VALIDAR QUE NO EXISTAN VALORES NULL
-    IF @Nombre IS NULL
-       OR @NumeroProducto IS NULL
-       OR @Color IS NULL
-       OR @StockSeguridad IS NULL
-       OR @PuntoReorden IS NULL
-       OR @CostoEstandar IS NULL
-       OR @PrecioVenta IS NULL
-       OR @DiasFabricacion IS NULL
-       OR @FechaInicioVenta IS NULL
-    BEGIN
-        RAISERROR('No se permite registrar un producto con valores NULL.', 16, 1);
-        RETURN;
-    END;
+    if exists (select top 1 from HumanResources.Department where Name = @Nombre)
+    begin 
+        print 'Error: Departamento ya existe';
+        return;
+    end;
 
-    -- VALIDAR QUE NOMBRE Y CODIGO NO ESTEN VACIOS
-    IF @Nombre = '' OR @NumeroProducto = ''
-    BEGIN
-        RAISERROR('El nombre y el codigo del producto son obligatorios.', 16, 1);
-        RETURN;
-    END;
+    insert into  HumanResources.Department (Name,GroupName) values (  @Nombre, @Grupo);
+    print 'Departamento registrado correctamente.';
 
-    -- VALIDAR QUE EL COLOR NO ESTE VACIO
-    IF @Color = ''
-    BEGIN
-        RAISERROR('El color del producto es obligatorio.', 16, 1);
-        RETURN;
-    END;
+end;
 
+exec sp_InsertarDepartamento
+    @Nombre = 'Tecnologia',
+    @Grupo = 'Administracion';
 
-    -- 4. VALIDAR QUE EL PRODUCTO NO EXISTA
-    IF EXISTS ( SELECT 1
-        FROM Production.Product
-        WHERE ProductNumber = @NumeroProducto)
-    BEGIN
-        RAISERROR('El codigo del producto ya existe.', 16, 1);
-        RETURN;
-    END;
+--Actualizar:  actualiza la cantidad disponible de un producto en una ubicacion
+create procedure sp_ActualizarCantidadInventarioUbicacion
+    @ProductID int, @LocationID smallint, @NuevaCantidad smallint
+as
+begin 
 
-    -- 5. VALIDAR STOCK
-    IF @StockSeguridad <= 0
-    BEGIN
-        RAISERROR('El stock de seguridad debe ser mayor que cero.', 16, 1);
-        RETURN;
-    END;
+    if not exists ( select 1  from Production.ProductInventory where ProductID = @ProductID and LocationID = @LocationID  )
+    begin 
+        print 'Error: El producto no existe en esa ubicación.';
+        return;
+    end;
 
-    -- 6. VALIDAR PUNTO DE REORDEN
-    IF @PuntoReorden < 0
-    BEGIN
-        RAISERROR('El punto de reorden no puede ser negativo.', 16, 1);
-        RETURN;
-    END;
+    if @NuevaCantidad < 0 
+    begin 
+        print 'Error: Cantidad no puede ser negativa'
+        return;
+    end;
 
-    -- 7. VALIDAR COSTO
-    IF @CostoEstandar <= 0
-    BEGIN
-        RAISERROR('El costo estandar debe ser mayor que cero.', 16, 1);
-        RETURN;
-    END;
+    update Production.ProductInventory
+    set Quantity = @NuevaCantidad,
+        ModifiedDate = GETDATE()
+    where ProductID = @ProductID and  LocationID = @LocationID;
 
-    -- 8. VALIDAR PRECIO DE VENTA
-    IF @PrecioVenta <= 0
-    BEGIN
-        RAISERROR('El precio de venta debe ser mayor que cero.', 16, 1);
-        RETURN;
-    END;
+    print 'Cantidad actualizada correctamente.'
 
-    -- 9. REGLA DE NEGOCIO: EL PRECIO NO PUEDE SER MENOR AL COSTO
-    IF @PrecioVenta < @CostoEstandar
-    BEGIN
-        RAISERROR('El precio de venta no puede ser menor que el costo estandar.', 16, 1);
-        RETURN;
-    END;
+end;
 
-    -- 10. VALIDAR DIAS DE FABRICACION
-    IF @DiasFabricacion < 0
-    BEGIN
-        RAISERROR('Los dias de fabricacion no pueden ser negativos.', 16, 1);
-        RETURN;
-    END;
+exec dbo.sp_ActualizarCantidadInventario
+    @ProductID = 1,
+    @LocationID = 1,
+    @NuevaCantidad = 100;
 
-    -- 11. INSERTAR EL PRODUCTO
-    INSERT INTO Production.Product (  Name,  ProductNumber,  MakeFlag,  FinishedGoodsFlag,  Color,  SafetyStockLevel, ReorderPoint,  StandardCost, ListPrice,DaysToManufacture, SellStartDate)
-    VALUES(  @Nombre,  @NumeroProducto, 1, 1,  @Color,@StockSeguridad, @PuntoReorden, @CostoEstandar, @PrecioVenta, @DiasFabricacion, @FechaInicioVenta);
-    PRINT 'Producto registrado correctamente.';
-END;
-GO
+--DELETE: Eliminamos un departamentoque no tenga empleados solo
+create procedure sp_eliminardepartamento
+    @nombre nvarchar(50)
+as
+begin
+
+    if not exists ( select 1 from humanresources.department where name = @nombre )
+    begin
+        print 'el departamento no existe.';
+        return;
+    end;
+
+    if exists ( select 1
+                 from humanresources.employeedepartmenthistory as edh
+                inner join humanresources.department as d on edh.departmentid = d.departmentid
+                where d.name = @nombre
+             )
+    begin
+        print 'no se puede eliminar: el departamento tiene registros asociados.';
+        return;
+    end;
 
 
-EXEC dbo.sp_InsertarProducto
-    @Nombre = 'Laptop Empresarial X1',
-    @NumeroProducto = 'EMP-2026-001',
-    @Color = 'Negro',
-    @StockSeguridad = 20,
-    @PuntoReorden = 10,
-    @CostoEstandar = 500.00,
-    @PrecioVenta = 750.00,
-    @DiasFabricacion = 3,
-    @FechaInicioVenta = GETDATE();
-GO
+    delete from humanresources.department
+    where name = @nombre;
+    print 'departamento eliminado correctamente.';
+end;
 
-DECLARE @Fecha DATETIME = GETDATE();
 
-EXEC dbo.sp_InsertarProducto
-    @Nombre = 'Laptop Empresarial X1',
-    @NumeroProducto = 'EMP-2026-001',
-    @Color = 'Negro',
-    @StockSeguridad = 20,
-    @PuntoReorden = 10,
-    @CostoEstandar = 500.00,
-    @PrecioVenta = 750.00,
-    @DiasFabricacion = 3,
-    @FechaInicioVenta = @Fecha;
-GO
+exec sp_eliminardepartamento
+    @nombre = 'tecnologia';
 
-SELECT TOP 10 ProductID, Name, ProductNumber,
-    Color,
-    SafetyStockLevel,
-    ReorderPoint,
-    StandardCost,
-    ListPrice,
-    DaysToManufacture,
-    SellStartDate
-FROM Production.Product
-ORDER BY ProductID DESC;
-GO
 
------------------------------------------------------------------------------------------------
---READ: Este procedimiento genera un reporte de empleados utilizando las tablas Person.Person y 
---HumanResources.Employee. Las relaciona mediante BusinessEntityID, muestra el nombre completo, 
---tipo de persona, puesto y estado del empleado, además de numerar y contabilizar los registros.
+-- select: consultar diferencias en work order
+create procedure sp_consultarworkorder
+as
+begin
 
-SELECT TOP 10 *FROM Person.Person;
+    select
+        case
+            when grouping(p.name) = 1 then 'total general'
+            else p.name 
+        end as producto,
+        sum(w.orderqty) as cantidad_solicitada,
+        sum(w.stockedqty) as cantidad_almacenada,
+        sum(w.scrappedqty) as cantidad_rechazada
+    from production.workorder as w
+    inner join production.product as p on w.productid = p.productid
+    group by rollup(p.name)
+    order by grouping(p.name),sum(w.orderqty - w.stockedqty) asc;
+end
 
-SELECT TOP 10 *FROM HumanResources.Employee;
+exec sp_consultarworkorder;
 
-CREATE PROCEDURE dbo.sp_ReportePersonas
-AS
-BEGIN
-    SELECT TOP 20  P.BusinessEntityID AS ID,
-        CONCAT(  P.FirstName,  ' ',  ISNULL(P.MiddleName + ' ', ''),   P.LastName ) AS NombreCompleto,
-        CASE P.PersonType
-            WHEN 'EM' THEN 'Empleado'
-            WHEN 'SC' THEN 'Contacto de tienda'
-            WHEN 'IN' THEN 'Cliente individual'
-            WHEN 'SP' THEN 'Vendedor'
-            WHEN 'VC' THEN 'Contacto de proveedor'
-            WHEN 'GC' THEN 'Contacto general'
-            ELSE 'Otro'
-        END AS TipoPersona,
 
-        ISNULL(E.JobTitle, 'No aplica') AS Puesto,
+--bUsqueda - cantidad de clientes por territorio
+create procedure sp_buscarclientesporterritorio
+    @territoryid int
+as
+begin
 
-        CASE
-            WHEN E.BusinessEntityID IS NOT NULL THEN 'Empleado activo'
-            ELSE 'No es empleado'
-        END AS EstadoEmpleado,
+    select  territoryid as territorio,
+          count(DISTINCT customerid) as cantidad_de_clientes
+    from sales.customer
+    where territoryid = @territoryid
+    group by territoryid;
+end;
 
-        COUNT(*) OVER() AS TotalPersonas,
+exec sp_buscarclientesporterritorio
+    @territoryid = 1;
 
-        ROW_NUMBER() OVER( ORDER BY P.LastName, P.FirstName ) AS NumeroRegistro
 
-    FROM Person.Person AS P
-    INNER JOIN HumanResources.Employee AS E ON P.BusinessEntityID = E.BusinessEntityID
-    ORDER BY P.LastName, P.FirstName;
-END;
-GO
+-- busqueda con 2 join - personas por tipo
+create procedure sp_buscarpersonasportipo
+    @tipopersona varchar(30)
+as
+begin
+    select  p.businessentityid as identificador,
+        concat( p.firstname,  ' ', isnull(p.middlename + ' ', ''), p.lastname ) as nombre_completo,
+        case
+            when p.persontype = 'EM' then 'empleado'
+            when p.persontype = 'SC' then 'contacto de tienda'
+            when p.persontype = 'IN' then 'persona individual'
+            when p.persontype = 'SP' then 'vendedor'
+            when p.persontype = 'VC' then 'contacto de proveedor'
+            when p.persontype = 'GC' then 'contacto general'
+        end as tipo_persona, 
 
-EXEC dbo.sp_ReportePersonas;
-GO
+        e.emailaddress as correo,
+        ph.phonenumber as telefono
+    from person.person as p
+    inner join person.emailaddress as e on p.businessentityid = e.businessentityid
+    inner join person.personphone as ph on p.businessentityid = ph.businessentityid
+    where
+        case
+            when p.persontype = 'EM' then 'empleado'
+            when p.persontype = 'SC' then 'contacto de tienda'
+            when p.persontype = 'IN' then 'persona individual'
+            when p.persontype = 'SP' then 'vendedor'
+            when p.persontype = 'VC' then 'contacto de proveedor'
+            when p.persontype = 'GC' then 'contacto general'
+        end = @tipopersona
+    order by  p.lastname, p.firstname;
 
+end;
+
+
+exec sp_buscarpersonasportipo
+    @tipopersona = 'Empleado';
