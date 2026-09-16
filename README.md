@@ -66,6 +66,66 @@
    - [Paso 26. Entrar al proyecto y desconectarlo del repositorio original](#paso-26-entrar-al-proyecto-y-desconectarlo-del-repositorio-original)
    - [Paso 27. Crear un repositorio propio en GitHub](#paso-27-crear-un-repositorio-propio-en-github)
    - [Paso 28. Copiar la URL del repositorio propio](#paso-28-copiar-la-url-del-repositorio-propio)
+9. [Creación y configuración de Stored Procedures para el CRUD](#creación-y-configuración-de-stored-procedures-para-el-crud)
+   - [Paso 29. Creación de Stored Procedures para el CRUD](#paso-29-creación-de-stored-procedures-para-el-crud)
+10. [Instalación y configuración de Node.js en WSL Ubuntu mediante NVM](#instalación-y-configuración-de-nodejs-en-wsl-ubuntu-mediante-nvm)
+    - [Paso 30. Instalar NVM en WSL Ubuntu](#paso-30-instalar-nvm-en-wsl-ubuntu)
+    - [Paso 31. Activar NVM en la terminal](#paso-31-activar-nvm-en-la-terminal)
+    - [Paso 32. Instalar Node.js en su versión LTS](#paso-32-instalar-nodejs-en-su-versión-lts)
+    - [Paso 33. Seleccionar la versión LTS de Node.js](#paso-33-seleccionar-la-versión-lts-de-nodejs)
+    - [Paso 34. Verificar que Node.js quedó instalado](#paso-34-verificar-que-nodejs-quedó-instalado)
+    - [Paso 35. Inicializar el proyecto](#paso-35-inicializar-el-proyecto)
+    - [Paso 36. Instalar las librerías necesarias](#paso-36-instalar-las-librerías-necesarias)
+    - [Paso 37. Instalar Nodemon](#paso-37-instalar-nodemon)
+    - [Paso 38. Verificar el archivo package.json](#paso-38-verificar-el-archivo-packagejson)
+    - [Paso 39. Comprobar las dependencias instaladas](#paso-39-comprobar-las-dependencias-instaladas)
+    - [Paso 40. Verificar Node.js y npm](#paso-40-verificar-nodejs-y-npm)
+11. [Configuración de los archivos de la API](#configuración-de-los-archivos-de-la-api)
+    - [Paso 41. Crear y configurar el archivo .env](#paso-41-crear-y-configurar-el-archivo-env)
+    - [Paso 42. Crear el archivo .gitignore](#paso-42-crear-el-archivo-gitignore)
+12. [Configuración del servidor](#configuración-del-servidor)
+    - [Paso 43. Crear el archivo server.js](#paso-43-crear-el-archivo-serverjs)
+    - [Paso 44. Crear el archivo de conexión db.js](#paso-44-crear-el-archivo-de-conexión-dbjs)
+13. [Creación de las rutas](#creación-de-las-rutas)
+    - [Paso 45. Crear el archivo departamentos.js](#paso-45-crear-el-archivo-departamentosjs)
+    - [Paso 46. Implementar la operación INSERT](#paso-46-implementar-la-operación-insert)
+    - [Paso 47. Implementar la operación UPDATE](#paso-47-implementar-la-operación-update)
+    - [Paso 48. Implementar la operación DELETE](#paso-48-implementar-la-operación-delete)
+    - [Paso 49. Implementar la consulta de clientes por territorio](#paso-49-implementar-la-consulta-de-clientes-por-territorio)
+    - [Paso 50. Implementar la consulta de personas por tipo](#paso-50-implementar-la-consulta-de-personas-por-tipo)
+    - [Paso 51. Implementar el reporte de Work Order](#paso-51-implementar-el-reporte-de-work-order)
+    - [Paso 52. Exportar las rutas](#paso-52-exportar-las-rutas)
+14. [Configuración de los Stored Procedures (ejecución en el servidor)](#configuración-de-los-stored-procedures-ejecución-en-el-servidor)
+    - [Paso 53. Verificar el archivo de Stored Procedures](#paso-53-verificar-el-archivo-de-stored-procedures)
+    - [Paso 54. Ejecutar los Stored Procedures en SQL Server](#paso-54-ejecutar-los-stored-procedures-en-sql-server)
+15. [Inicio y prueba de la API](#inicio-y-prueba-de-la-api)
+    - [Paso 55. Iniciar el servidor](#paso-55-iniciar-el-servidor)
+    - [Paso 56. Abrir una segunda terminal para realizar las pruebas](#paso-56-abrir-una-segunda-terminal-para-realizar-las-pruebas)
+    - [Paso 57. Probar la ruta principal de la API](#paso-57-probar-la-ruta-principal-de-la-api)
+    - [Paso 58. Probar la consulta de clientes por territorio](#paso-58-probar-la-consulta-de-clientes-por-territorio)
+    - [Paso 59. Probar la actualización del inventario](#paso-59-probar-la-actualización-del-inventario)
+    - [Paso 60. Probar la operación DELETE](#paso-60-probar-la-operación-delete)
+    - [Paso 61. Verificación final del funcionamiento](#paso-61-verificación-final-del-funcionamiento)
+    - [Paso 62. Datos de prueba para validar la API](#paso-62-datos-de-prueba-para-validar-la-api)
+16. [Instalación y uso de Postman](#instalación-y-uso-de-postman)
+    - [Paso 63. Descargar e instalar Postman en Windows](#paso-63-descargar-e-instalar-postman-en-windows)
+    - [Paso 64. Comprender cómo se comunica Postman con la API](#paso-64-comprender-cómo-se-comunica-postman-con-la-api)
+    - [Paso 65. Abrir Postman y realizar la primera prueba](#paso-65-abrir-postman-y-realizar-la-primera-prueba)
+    - [Paso 66. Probar una consulta GET con Postman](#paso-66-probar-una-consulta-get-con-postman)
+    - [Paso 67. Probar una solicitud POST con Postman](#paso-67-probar-una-solicitud-post-con-postman)
+    - [Paso 68. Probar una solicitud PUT con Postman](#paso-68-probar-una-solicitud-put-con-postman)
+    - [Paso 69. Probar una solicitud DELETE con Postman](#paso-69-probar-una-solicitud-delete-con-postman)
+    - [Paso 70. Probar las demás consultas de la API](#paso-70-probar-las-demás-consultas-de-la-api)
+    - [Paso 71. Organizar las pruebas en una colección de Postman](#paso-71-organizar-las-pruebas-en-una-colección-de-postman)
+    - [Paso 72. Verificación final utilizando Postman](#paso-72-verificación-final-utilizando-postman)
+   - [Paso 23. Verificar la instalación de Git](#paso-23-verificar-la-instalación-de-git)
+   - [Paso 24. Ubicarse en la carpeta Home de Ubuntu](#paso-24-ubicarse-en-la-carpeta-home-de-ubuntu)
+   - [Paso 25. Clonar el repositorio del profesor](#paso-25-clonar-el-repositorio-del-profesor)
+   - [Paso 26. Entrar al proyecto y desconectarlo del repositorio original](#paso-26-entrar-al-proyecto-y-desconectarlo-del-repositorio-original)
+   - [Paso 27. Crear un repositorio propio en GitHub](#paso-27-crear-un-repositorio-propio-en-github)
+   - [Paso 28. Copiar la URL del repositorio propio](#paso-28-copiar-la-url-del-repositorio-propio)
+
+> 💡 En GitHub y en la vista previa de Markdown de VS Code, cada título del índice es un enlace que salta directamente a esa sección.
 
 ---
 
@@ -564,3 +624,995 @@ git push -u origin main
 El primer comando establece `main` como nombre de la rama principal. El segundo envía los archivos del proyecto al repositorio personal de GitHub y establece la conexión entre la rama local y la rama remota.
 
 Una vez finalizado el proceso, se puede ingresar al repositorio desde el navegador y comprobar que los archivos del proyecto se encuentren disponibles.
+
+---
+
+## Creación y configuración de Stored Procedures para el CRUD
+
+### Paso 29. Creación de Stored Procedures para el CRUD
+
+En este paso se crean los Stored Procedures dentro de la base de datos AdventureWorks2022. Un **Stored Procedure** es un conjunto de instrucciones SQL que se guarda directamente en SQL Server y que posteriormente puede ejecutarse mediante un nombre. En este proyecto se utilizan para realizar las operaciones del **CRUD** (insertar, consultar, actualizar y eliminar información), de manera que la API desarrollada con Node.js pueda comunicarse con SQL Server y ejecutar estos procedimientos.
+
+Primero se utiliza `USE AdventureWorks2022;` para indicar que todos los procedimientos creados a continuación pertenecen a esta base de datos, y `GO` para separar los bloques de instrucciones que serán ejecutados por SQL Server Management Studio.
+
+#### `sp_InsertarDepartamento` — Inserción
+
+Recibe dos parámetros: el nombre del departamento y el grupo al que pertenece. Antes de insertar la información se realizan validaciones utilizando `IF`, `IS NULL` y `EXISTS`, para comprobar que los datos obligatorios hayan sido proporcionados y que no exista otro departamento con el mismo nombre. Si todo es correcto, se utiliza `INSERT INTO` para registrar el nuevo departamento en la tabla `HumanResources.Department`.
+
+#### `sp_ActualizarCantidadInventarioUbicacion` — Actualización
+
+Recibe el identificador del producto, el identificador de la ubicación y la nueva cantidad disponible. Utiliza `NOT EXISTS` para comprobar que el producto realmente exista en esa ubicación y valida que la nueva cantidad no sea negativa. Después utiliza `UPDATE` para modificar la cantidad en la tabla `Production.ProductInventory`, y `GETDATE()` para actualizar la fecha de modificación del registro.
+
+#### `sp_EliminarDepartamento` — Eliminación
+
+Recibe el nombre del departamento. Primero comprueba mediante `NOT EXISTS` que el departamento exista. Después utiliza un `INNER JOIN` entre `EmployeeDepartmentHistory` y `Department` para verificar si existen registros relacionados con empleados. Si el departamento tiene información asociada, la eliminación se detiene mediante `RETURN`; si no existen registros relacionados, se utiliza `DELETE`. Esta validación evita eliminar información que todavía está relacionada con otros registros.
+
+#### `sp_ConsultarWorkOrder` — Consulta
+
+Utiliza un `INNER JOIN` entre `Production.WorkOrder` y `Production.Product` para relacionar las órdenes de trabajo con sus productos. Se utiliza `SUM` para calcular cantidades solicitadas, almacenadas y rechazadas, `GROUP BY ROLLUP` para generar un total general, y `GROUPING` junto con `CASE` para mostrar el texto "TOTAL GENERAL" en la fila correspondiente. `ORDER BY` organiza los resultados.
+
+#### `sp_BuscarClientesPorTerritorio` — Consulta
+
+Recibe el identificador de un territorio y busca los clientes correspondientes en `Sales.Customer`. Utiliza `WHERE` para filtrar el territorio indicado, `COUNT(DISTINCT CustomerID)` para contar los clientes diferentes y `GROUP BY` para agrupar el resultado por territorio.
+
+#### `sp_BuscarPersonasPorTipo` — Consulta
+
+Utiliza dos `INNER JOIN` para relacionar `Person.Person` con `Person.EmailAddress` y `Person.PersonPhone`. Recibe como parámetro el tipo de persona a buscar y usa `CASE` para convertir los códigos almacenados (`EM`, `SC`, `SP`) en descripciones legibles ("empleado", "contacto de tienda", "vendedor"). También utiliza `CONCAT` para construir el nombre completo e `ISNULL` para controlar los casos sin segundo nombre. `WHERE` filtra según el tipo solicitado.
+
+> 📌 **Nota:** una vez creados los procedimientos, se utiliza `EXEC` para ejecutarlos y comprobar que funcionan correctamente (por ejemplo, `EXEC sp_InsertarDepartamento`). También se puede usar `sp_helptext` para visualizar el código de un Stored Procedure, y la vista del sistema `sys.procedures` para confirmar que fueron creados correctamente.
+
+---
+
+## Instalación y configuración de Node.js en WSL Ubuntu mediante NVM
+
+### Paso 30. Instalar NVM en WSL Ubuntu
+
+Para ejecutar la API se necesita Node.js. Se utilizará **nvm** (Node Version Manager), una herramienta que permite instalar y administrar diferentes versiones de Node.js fácilmente.
+
+Se abre la terminal de Ubuntu en WSL desde Visual Studio Code (debería mostrar una ruta similar a `/home/tu_usuario`) y se instala nvm:
+
+```bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+```
+
+Este comando descarga y ejecuta el instalador de nvm desde su repositorio oficial.
+
+### Paso 31. Activar NVM en la terminal
+
+Después de instalar nvm, es necesario recargar la configuración de la terminal para que el comando `nvm` pueda utilizarse:
+
+```bash
+source ~/.bashrc
+```
+
+El archivo `.bashrc` contiene configuraciones que se cargan al iniciar una sesión de Bash; `source` aplica esos cambios inmediatamente, sin tener que cerrar y volver a abrir la terminal.
+
+Para comprobar que nvm está disponible:
+
+```bash
+nvm --version
+```
+
+Si la instalación fue correcta, aparecerá un número de versión (por ejemplo, `0.40.1`).
+
+### Paso 32. Instalar Node.js en su versión LTS
+
+Se instalará la versión **LTS** (Long Term Support), por ser una versión estable y recomendada para proyectos que necesitan confiabilidad:
+
+```bash
+nvm install --lts
+```
+
+nvm buscará automáticamente la versión LTS disponible y la instalará. No es necesario especificar ninguna versión, ya que `--lts` hace que nvm la seleccione automáticamente.
+
+### Paso 33. Seleccionar la versión LTS de Node.js
+
+```bash
+nvm use --lts
+```
+
+Debería aparecer un mensaje parecido a `Now using node v22.x.x` (el número exacto puede variar según la versión LTS disponible). Esto indica que esa versión de Node.js quedó activa en la terminal actual.
+
+### Paso 34. Verificar que Node.js quedó instalado
+
+```bash
+node -v
+npm -v
+```
+
+El primer comando muestra la versión instalada de Node.js (por ejemplo, `v22.x.x`); el segundo muestra la versión de npm, el administrador de paquetes de Node.js (por ejemplo, `10.x.x`). Si ambos comandos muestran una versión, la instalación fue exitosa.
+
+### Paso 35. Inicializar el proyecto
+
+Antes de inicializar el proyecto, se verifica que la terminal se encuentre ubicada dentro de la carpeta `adventureworks-api`:
+
+```bash
+pwd
+ls
+```
+
+`pwd` muestra la ruta actual (debe corresponder a algo como `/home/usuario/adventureworks-api`) y `ls` permite visualizar los archivos y carpetas existentes.
+
+Una vez confirmada la ubicación, se inicializa el proyecto de Node.js:
+
+```bash
+npm init -y
+```
+
+Este comando crea el archivo `package.json`, donde se almacena la información del proyecto y se registran las librerías utilizadas posteriormente por la API. La opción `-y` acepta automáticamente la configuración predeterminada, sin preguntas manuales.
+
+Al finalizar, se puede volver a usar `ls` para comprobar que se creó el archivo `package.json`.
+
+> 📌 **Nota:** si aparece un mensaje indicando que `npm` no es reconocido, se debe comprobar que Node.js esté disponible en la terminal. Si se utilizó nvm, puede ser necesario ejecutar `nvm use --lts` antes de volver a intentarlo.
+
+### Paso 36. Instalar las librerías necesarias
+
+Se instalan las dependencias que permitirán construir y ejecutar la API:
+
+```bash
+npm install express mssql dotenv cors
+```
+
+| Librería | Función |
+|---|---|
+| `express` | Crea el servidor web de la API y define sus rutas (GET, POST, PUT, DELETE). |
+| `mssql` | Establece la comunicación entre Node.js y SQL Server, y permite ejecutar los Stored Procedures. |
+| `dotenv` | Administra información de configuración mediante variables de entorno (`.env`), manteniendo datos sensibles fuera del código. |
+| `cors` | Controla las solicitudes realizadas desde diferentes orígenes (por ejemplo, Postman o un frontend). |
+
+Durante la instalación, npm descarga las librerías dentro de `node_modules` y actualiza automáticamente `package.json`.
+
+> 📌 **Nota:** el proceso puede tardar algunos minutos según la conexión a Internet. No se recomienda cerrar la terminal mientras npm está instalando.
+
+### Paso 37. Instalar Nodemon
+
+Se instala **Nodemon** como herramienta de desarrollo, para que el servidor se reinicie automáticamente al modificar archivos del proyecto:
+
+```bash
+npm install --save-dev nodemon
+```
+
+La opción `--save-dev` registra Nodemon como dependencia de desarrollo; aparecerá dentro de la sección `devDependencies` de `package.json`.
+
+> 📌 **Nota:** Nodemon no es necesario para que la API funcione en sí misma, pero facilita considerablemente el desarrollo al reiniciar el servidor automáticamente.
+
+### Paso 38. Verificar el archivo package.json
+
+```bash
+cat package.json
+```
+
+Dentro del archivo debe aparecer una sección `dependencies` con las librerías principales:
+
+```json
+"dependencies": {
+  "cors": "^2.x.x",
+  "dotenv": "^16.x.x",
+  "express": "^4.x.x",
+  "mssql": "^11.x.x"
+}
+```
+
+Y una sección `devDependencies` con Nodemon:
+
+```json
+"devDependencies": {
+  "nodemon": "^..."
+}
+```
+
+> 📌 **Nota:** los números de versión pueden variar; lo importante es que `express`, `mssql`, `dotenv` y `cors` aparezcan en `dependencies`, y `nodemon` en `devDependencies`.
+
+### Paso 39. Comprobar las dependencias instaladas
+
+```bash
+npm list --depth=0
+```
+
+Muestra las principales dependencias instaladas sin desglosar las dependencias internas de cada librería. El resultado debe incluir `express`, `mssql`, `dotenv`, `cors` y `nodemon`. Si alguna no aparece, se recomienda revisar nuevamente la instalación.
+
+### Paso 40. Verificar Node.js y npm
+
+```bash
+node -v
+npm -v
+```
+
+Ambos comandos deben mostrar un número de versión (por ejemplo, Node.js `v24.x.x` y npm `11.x.x`). Si ambos responden correctamente y las dependencias están instaladas, el entorno está listo para continuar con el desarrollo de la API.
+
+> 📌 **Nota sobre errores:** los mensajes `npm WARN` son advertencias y no necesariamente indican que el proceso falló. Los mensajes `npm ERR!` sí indican un error que debe revisarse antes de continuar.
+
+---
+
+## Configuración de los archivos de la API
+
+### Paso 41. Crear y configurar el archivo .env
+
+Se crea un archivo `.env` en la carpeta principal del proyecto `adventureworks-api`, con las variables necesarias para conectarse a SQL Server:
+
+```env
+DB_USER=SA
+DB_PASSWORD=TuPassword123!
+DB_SERVER=localhost
+DB_DATABASE=AdventureWorks2022
+DB_PORT=1433
+PORT=3000
+```
+
+| Variable | Descripción |
+|---|---|
+| `DB_USER` | Usuario utilizado para conectarse a SQL Server. |
+| `DB_PASSWORD` | Contraseña real configurada para el usuario `SA`. |
+| `DB_SERVER` | Servidor donde se encuentra SQL Server (`localhost` en este proyecto). |
+| `DB_DATABASE` | Nombre de la base de datos (`AdventureWorks2022`). |
+| `DB_PORT` | Puerto utilizado para la conexión (`1433`). |
+| `PORT` | Puerto donde Express iniciará la API (`3000`). |
+
+> ⚠️ **Nota importante:** el archivo `.env` contiene información sensible, especialmente la contraseña de la base de datos. Por esta razón, **no se debe publicar en GitHub** — se recomienda incluirlo en `.gitignore`.
+
+### Paso 42. Crear el archivo .gitignore
+
+Se crea un archivo `.gitignore` en la carpeta principal del proyecto:
+
+```text
+node_modules/
+.env
+```
+
+`node_modules` contiene todas las librerías descargadas por npm y puede ocupar mucho espacio; no es necesario subirla porque las dependencias se pueden reinstalar desde `package.json`. `.env` debe ignorarse porque contiene contraseñas y otros datos que no deben publicarse.
+
+> 📌 **Nota:** el archivo `package-lock.json` sí debe conservarse en el repositorio, ya que registra las versiones específicas de las dependencias instaladas.
+
+---
+
+## Configuración del servidor
+
+### Paso 43. Crear el archivo server.js
+
+Se crea el archivo principal de la aplicación dentro de la carpeta `src`, llamado `server.js`. Es el punto de entrada de la API: inicia Express, carga las variables de `.env`, habilita JSON, configura CORS y registra las rutas disponibles.
+
+```javascript
+require('dotenv').config();
+const express = require('express');
+const cors = require('cors');
+
+const departamentosRoutes = require('./routes/departamentos');
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+app.use(cors());
+app.use(express.json());
+
+// Todas las rutas del CRUD viven bajo /api
+app.use('/api', departamentosRoutes);
+
+// Ruta de salud, para comprobar rápido que el servidor está vivo
+app.get('/', (req, res) => {
+  res.json({
+    mensaje: 'API AdventureWorks corriendo correctamente.'
+  });
+});
+
+app.listen(PORT, () => {
+  console.log(`Servidor escuchando en http://localhost:${PORT}`);
+});
+```
+
+- `require('dotenv').config()` permite que la aplicación lea las variables de `.env` (por ejemplo, el puerto mediante `process.env.PORT`).
+- `express.json()` permite que Express interprete los datos enviados en formato JSON, necesario para operaciones como registrar departamentos o actualizar inventario.
+- `app.use('/api', departamentosRoutes)` registra las rutas bajo el prefijo `/api` (por ejemplo, `/departamentos` se vuelve `/api/departamentos`).
+- La ruta `/` funciona como **ruta de salud**, para comprobar rápidamente que el servidor está activo.
+- `app.listen()` inicia el servidor en el puerto configurado; al ejecutarse correctamente, la terminal mostrará `Servidor escuchando en http://localhost:3000`.
+
+### Paso 44. Crear el archivo de conexión db.js
+
+Se crea el archivo `db.js` dentro de `src`, responsable de establecer la conexión entre Node.js y SQL Server usando la librería `mssql` y las variables de entorno:
+
+```javascript
+require('dotenv').config();
+const sql = require('mssql');
+
+const config = {
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  server: process.env.DB_SERVER,
+  database: process.env.DB_DATABASE,
+  port: Number(process.env.DB_PORT) || 1433,
+  options: {
+    encrypt: false,
+    trustServerCertificate: true,
+  },
+  pool: {
+    max: 10,
+    min: 0,
+    idleTimeoutMillis: 30000,
+  },
+};
+
+let poolPromise;
+
+function getPool() {
+  if (!poolPromise) {
+    poolPromise = new sql.ConnectionPool(config)
+      .connect()
+      .then((pool) => {
+        console.log('Conectado a SQL Server');
+        return pool;
+      })
+      .catch((err) => {
+        console.error('Error al conectar a SQL Server:', err.message);
+        poolPromise = null;
+        throw err;
+      });
+  }
+  return poolPromise;
+}
+
+module.exports = { sql, getPool };
+```
+
+La función `getPool()` crea un grupo de conexiones mediante `sql.ConnectionPool`; cuando la conexión se establece correctamente, se muestra el mensaje `Conectado a SQL Server`. El uso de `poolPromise` permite reutilizar la conexión en lugar de crear una nueva para cada solicitud.
+
+> 📌 **Nota:** si los datos de `.env` son incorrectos (usuario, contraseña, servidor o nombre de base de datos), la conexión fallará y se mostrará un mensaje de error en la terminal.
+
+---
+
+## Creación de las rutas
+
+### Paso 45. Crear el archivo departamentos.js
+
+Se crea la carpeta `routes` dentro de `src`, y dentro de ella el archivo `departamentos.js`, con la siguiente estructura:
+
+```text
+src/
+├── server.js
+├── db.js
+└── routes/
+    └── departamentos.js
+```
+
+El archivo comienza importando Express y las funciones necesarias para conectarse con SQL Server:
+
+```javascript
+const express = require('express');
+const router = express.Router();
+const { sql, getPool } = require('../db');
+```
+
+### Paso 46. Implementar la operación INSERT
+
+**`POST /api/departamentos`** — registra un nuevo departamento.
+
+```javascript
+router.post('/departamentos', async (req, res) => {
+  const { nombre, grupo } = req.body;
+
+  if (!nombre || !grupo) {
+    return res.status(400).json({
+      error: 'nombre y grupo son obligatorios.'
+    });
+  }
+
+  try {
+    const pool = await getPool();
+    const result = await pool
+      .request()
+      .input('Nombre', sql.NVarChar(40), nombre)
+      .input('Grupo', sql.NVarChar(40), grupo)
+      .execute('sp_InsertarDepartamento');
+
+    res.status(201).json({
+      mensaje: 'Departamento registrado correctamente.',
+      info: result.returnValue,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: err.message });
+  }
+});
+```
+
+La ruta recibe `nombre` y `grupo` mediante `req.body`, valida que ambos hayan sido proporcionados, los envía a SQL Server mediante `.input()` (indicando el nombre y el tipo de dato), y finalmente ejecuta el Stored Procedure con `.execute('sp_InsertarDepartamento')`.
+
+### Paso 47. Implementar la operación UPDATE
+
+**`PUT /api/inventario`** — actualiza la cantidad de inventario de un producto en una ubicación.
+
+Cuerpo esperado:
+
+```json
+{
+  "productId": 1,
+  "locationId": 1,
+  "nuevaCantidad": 100
+}
+```
+
+```javascript
+router.put('/inventario', async (req, res) => {
+  const { productId, locationId, nuevaCantidad } = req.body;
+
+  if (productId == null || locationId == null || nuevaCantidad == null) {
+    return res.status(400).json({
+      error: 'productId, locationId y nuevaCantidad son obligatorios.'
+    });
+  }
+
+  try {
+    const pool = await getPool();
+    await pool
+      .request()
+      .input('ProductID', sql.Int, productId)
+      .input('LocationID', sql.SmallInt, locationId)
+      .input('NuevaCantidad', sql.SmallInt, nuevaCantidad)
+      .execute('sp_ActualizarCantidadInventarioUbicacion');
+
+    res.json({ mensaje: 'Cantidad actualizada correctamente.' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: err.message });
+  }
+});
+```
+
+> 📌 **Nota:** durante las pruebas se presentó el error `Could not find stored procedure 'dbo.sp_ActualizarCantidadInventario'`, porque inicialmente se utilizó un nombre distinto al del procedimiento almacenado real. El nombre correcto es `sp_ActualizarCantidadInventarioUbicacion`. Los nombres utilizados en `.execute()` deben coincidir exactamente con los Stored Procedures existentes en SQL Server.
+
+### Paso 48. Implementar la operación DELETE
+
+**`DELETE /api/departamentos/:nombre`** — elimina un departamento.
+
+```javascript
+router.delete('/departamentos/:nombre', async (req, res) => {
+  const { nombre } = req.params;
+
+  try {
+    const pool = await getPool();
+    await pool
+      .request()
+      .input('nombre', sql.NVarChar(50), nombre)
+      .execute('sp_eliminardepartamento');
+
+    res.json({
+      mensaje: 'Departamento eliminado correctamente (si existia y no tenia dependencias).'
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: err.message });
+  }
+});
+```
+
+El nombre del departamento se recibe directamente desde la URL mediante `req.params` (por ejemplo, `DELETE /api/departamentos/Marketing`) y se envía al procedimiento `sp_eliminardepartamento`. La eliminación dependerá de las relaciones existentes: si hay registros que dependen del departamento, SQL Server puede impedirla.
+
+### Paso 49. Implementar la consulta de clientes por territorio
+
+**`GET /api/clientes/territorio/:territoryId`**
+
+```javascript
+router.get('/clientes/territorio/:territoryId', async (req, res) => {
+  const { territoryId } = req.params;
+
+  try {
+    const pool = await getPool();
+    const result = await pool
+      .request()
+      .input('territoryid', sql.Int, territoryId)
+      .execute('sp_buscarclientesporterritorio');
+
+    res.json(result.recordset);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: err.message });
+  }
+});
+```
+
+El identificador del territorio se obtiene desde la URL y se envía al procedimiento `sp_buscarclientesporterritorio`. Los datos obtenidos se encuentran en `result.recordset`, que se devuelve al usuario en formato JSON. Por ejemplo, `GET /api/clientes/territorio/1` puede producir:
+
+```json
+[
+  {
+    "territorio": 1,
+    "cantidad_de_clientes": 3520
+  }
+]
+```
+
+### Paso 50. Implementar la consulta de personas por tipo
+
+**`GET /api/personas/tipo/:tipoPersona`** (por ejemplo, `GET /api/personas/tipo/empleado`)
+
+```javascript
+router.get('/personas/tipo/:tipoPersona', async (req, res) => {
+  const { tipoPersona } = req.params;
+
+  try {
+    const pool = await getPool();
+    const result = await pool
+      .request()
+      .input('tipopersona', sql.VarChar(30), tipoPersona)
+      .execute('sp_buscarpersonasportipo');
+
+    res.json(result.recordset);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: err.message });
+  }
+});
+```
+
+El parámetro `tipoPersona` se obtiene de la URL y se envía al Stored Procedure `sp_buscarpersonasportipo`, demostrando cómo la API recibe parámetros desde la dirección HTTP para consultar la base de datos.
+
+### Paso 51. Implementar el reporte de Work Order
+
+**`GET /api/workorder/reporte`**
+
+```javascript
+router.get('/workorder/reporte', async (req, res) => {
+  try {
+    const pool = await getPool();
+    const result = await pool.request().execute('sp_consultarworkorder');
+    res.json(result.recordset);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: err.message });
+  }
+});
+```
+
+Esta ruta no necesita parámetros: obtiene una conexión con SQL Server, ejecuta `sp_consultarworkorder` (que utiliza `JOIN` y `ROLLUP`) y devuelve el resultado.
+
+### Paso 52. Exportar las rutas
+
+Al final de `departamentos.js`:
+
+```javascript
+module.exports = router;
+```
+
+Esto permite que `server.js` importe todas las rutas mediante:
+
+```javascript
+const departamentosRoutes = require('./routes/departamentos');
+```
+
+y las registre con `app.use('/api', departamentosRoutes)`. De esta manera, `server.js` se encarga de iniciar la aplicación, y `departamentos.js` administra las diferentes operaciones de la API.
+
+---
+
+## Configuración de los Stored Procedures (ejecución en el servidor)
+
+### Paso 53. Verificar el archivo de Stored Procedures
+
+Antes de ejecutar la API, se verifica que el archivo SQL con los procedimientos almacenados esté disponible dentro del proyecto:
+
+```bash
+cat "Script sql/StroreProcedures.sql"
+```
+
+> 📌 **Nota:** se debe utilizar exactamente el nombre real del archivo. Linux diferencia entre mayúsculas y minúsculas, así que el nombre debe coincidir con precisión (por ejemplo, `StroreProcedures.sql` o `StoreProcedures.sql`, según corresponda).
+
+### Paso 54. Ejecutar los Stored Procedures en SQL Server
+
+```bash
+sqlcmd -S localhost -U SA -P 'TuPassword123!' -C -i "Script sql/StroreProcedures.sql"
+```
+
+| Opción | Función |
+|---|---|
+| `-S localhost` | Servidor SQL al que se desea conectar. |
+| `-U SA` | Usuario de SQL Server. |
+| `-P` | Contraseña correspondiente (reemplazar `TuPassword123!` por la real). |
+| `-C` | Confía en el certificado del servidor. |
+| `-i` | Archivo de entrada con las instrucciones SQL a ejecutar. |
+
+Al finalizar correctamente, los Stored Procedures quedarán disponibles en la base de datos para que la API pueda ejecutarlos.
+
+> ⚠️ **Nota de seguridad:** la contraseña utilizada en un comando de este tipo puede quedar registrada en el historial de la terminal. Para un entorno real, se recomienda utilizar mecanismos de autenticación y configuración más seguros.
+
+---
+
+## Inicio y prueba de la API
+
+### Paso 55. Iniciar el servidor
+
+Desde la carpeta principal del proyecto:
+
+```bash
+npm run dev
+```
+
+Este comando utiliza el script configurado en `package.json` para iniciar la aplicación con Nodemon. Si todo está correctamente configurado, deberían aparecer mensajes similares a:
+
+```text
+Servidor escuchando en http://localhost:3000
+Conectado a SQL Server
+```
+
+Nodemon permanecerá ejecutándose, observando los archivos del proyecto para reiniciar el servidor automáticamente ante cualquier cambio.
+
+> 📌 **Nota:** la terminal donde se ejecuta el servidor debe mantenerse abierta.
+
+### Paso 56. Abrir una segunda terminal para realizar las pruebas
+
+Mientras el servidor continúa funcionando en la primera terminal (`npm run dev`), se abre una segunda terminal de Ubuntu en Visual Studio Code, que se utilizará para enviar solicitudes a la API mediante `curl` sin detener el servidor.
+
+### Paso 57. Probar la ruta principal de la API
+
+```bash
+curl http://localhost:3000/
+```
+
+Respuesta esperada:
+
+```json
+{
+  "mensaje": "API AdventureWorks corriendo correctamente."
+}
+```
+
+Si aparece este mensaje, el servidor está activo y puede recibir solicitudes HTTP.
+
+### Paso 58. Probar la consulta de clientes por territorio
+
+```bash
+curl http://localhost:3000/api/clientes/territorio/1
+```
+
+Respuesta esperada (el valor puede variar según los datos existentes):
+
+```json
+[
+  {
+    "territorio": 1,
+    "cantidad_de_clientes": 3520
+  }
+]
+```
+
+Esta prueba verifica Express, la conexión con SQL Server, el envío del parámetro y la ejecución del Stored Procedure.
+
+### Paso 59. Probar la actualización del inventario
+
+```bash
+curl -X PUT http://localhost:3000/api/inventario \
+  -H "Content-Type: application/json" \
+  -d '{"productId":1,"locationId":1,"nuevaCantidad":100}'
+```
+
+Respuesta esperada:
+
+```json
+{
+  "mensaje": "Cantidad actualizada correctamente."
+}
+```
+
+Confirma que la solicitud llegó a Express, que la API se conectó con SQL Server, que el Stored Procedure fue encontrado y que la operación se ejecutó correctamente.
+
+### Paso 60. Probar la operación DELETE
+
+```bash
+curl -X DELETE http://localhost:3000/api/departamentos/Marketing
+```
+
+Respuesta esperada:
+
+```json
+{
+  "mensaje": "Departamento eliminado correctamente (si existia y no tenia dependencias)."
+}
+```
+
+> 📌 **Nota:** si el departamento posee dependencias que impiden su eliminación, SQL Server puede devolver un error. Esto no significa que la API esté mal configurada, sino que la base de datos está protegiendo la integridad de sus relaciones.
+
+### Paso 61. Verificación final del funcionamiento
+
+Se verifica que las principales funcionalidades respondan correctamente: la ruta principal confirma que Express está activo; la consulta de clientes por territorio verifica la comunicación con SQL Server; la operación PUT comprueba la actualización del inventario; y la operación DELETE comprueba la eliminación de un departamento.
+
+En este punto, la estructura general del proyecto debe quedar organizada así:
+
+```text
+adventureworks-api/
+│
+├── src/
+│   ├── server.js
+│   ├── db.js
+│   │
+│   └── routes/
+│       └── departamentos.js
+│
+├── Script sql/
+│   └── StroreProcedures.sql
+│
+├── node_modules/
+│
+├── .gitignore
+├── package.json
+└── package-lock.json
+```
+
+| Archivo / carpeta | Función |
+|---|---|
+| `server.js` | Inicia la API y registra las rutas. |
+| `db.js` | Administra la conexión con SQL Server. |
+| `routes/departamentos.js` | Contiene las operaciones HTTP y ejecuta los Stored Procedures. |
+| `Script sql/` | Contiene los procedimientos almacenados utilizados por la aplicación. |
+| `package.json` | Registra las dependencias del proyecto. |
+
+### Paso 62. Datos de prueba para validar la API
+
+Antes de las pruebas finales con Postman, estos son los datos utilizados para comprobar el funcionamiento de los distintos endpoints:
+
+**Insertar un departamento**
+
+```http
+POST http://localhost:3000/api/departamentos
+```
+
+```json
+{
+  "nombre": "Marketing",
+  "grupo": "Administracion"
+}
+```
+
+**Actualizar el inventario**
+
+```http
+PUT http://localhost:3000/api/inventario
+```
+
+```json
+{
+  "productId": 1,
+  "locationId": 1,
+  "nuevaCantidad": 100
+}
+```
+
+**Consultar clientes por territorio**
+
+```http
+GET http://localhost:3000/api/clientes/territorio/1
+```
+
+**Consultar personas por tipo**
+
+```http
+GET http://localhost:3000/api/personas/tipo/empleado
+```
+
+**Reporte de órdenes de trabajo** (no requiere datos en el cuerpo)
+
+```http
+GET http://localhost:3000/api/workorder/reporte
+```
+
+**Eliminar el departamento registrado**
+
+```http
+DELETE http://localhost:3000/api/departamentos/Marketing
+```
+
+> 📌 **Nota:** estos datos se utilizan tanto desde la terminal (`curl`) como desde Postman. Los resultados de las consultas pueden variar según los registros existentes en AdventureWorks2022.
+
+---
+
+## Instalación y uso de Postman
+
+### Paso 63. Descargar e instalar Postman en Windows
+
+Como último paso del proyecto se instala **Postman**, una aplicación que permite probar APIs de forma visual y organizada. Postman se instala directamente en Windows, aunque la API se ejecute dentro de WSL Ubuntu — esto no representa un problema, ya que Postman puede enviar solicitudes HTTP hacia el servidor donde está corriendo la API.
+
+Se descarga desde el [sitio oficial de Postman](https://www.postman.com/downloads/), se ejecuta el instalador en Windows y se siguen las instrucciones en pantalla.
+
+> 📌 **Nota:** no es necesario instalar Postman dentro de Ubuntu. Postman se utiliza en Windows, mientras Node.js, la API y el resto del proyecto continúan ejecutándose en WSL Ubuntu.
+
+### Paso 64. Comprender cómo se comunica Postman con la API
+
+Postman no reemplaza a Node.js, Express ni SQL Server: funciona como cliente que envía solicitudes HTTP a la API y muestra las respuestas de forma visual.
+
+```text
+                         WINDOWS
+┌───────────────────────────────────────────┐
+│                  POSTMAN                  │
+│          GET / POST / PUT / DELETE        │
+└─────────────────────┬─────────────────────┘
+                      │ Solicitud HTTP
+                      ▼
+              http://localhost:3000
+                       │
+                       ▼
+┌───────────────────────────────────────────┐
+│                WSL UBUNTU                 │
+│              Node.js + Express            │
+│                     │                     │
+│                     ▼                     │
+│                 SQL Server                │
+│                     │                     │
+│                     ▼                     │
+│             Stored Procedures             │
+└─────────────────────┬─────────────────────┘
+                      │ Respuesta JSON
+                      ▼
+                   POSTMAN
+```
+
+Cuando desde Postman se realiza una solicitud, esta llega al servidor Node.js en WSL; Express identifica la ruta, ejecuta el código correspondiente y, cuando es necesario, se comunica con SQL Server. La API devuelve una respuesta (normalmente JSON) y Postman la muestra en pantalla.
+
+> ⚠️ **Nota importante:** antes de usar Postman, la API debe estar ejecutándose (`npm run dev`), mostrando `Servidor escuchando en http://localhost:3000` y `Conectado a SQL Server`.
+
+### Paso 65. Abrir Postman y realizar la primera prueba
+
+Se crea una nueva solicitud:
+
+| Campo | Valor |
+|---|---|
+| Método | `GET` |
+| URL | `http://localhost:3000/` |
+
+Al presionar **Send**, la respuesta esperada es:
+
+```json
+{
+  "mensaje": "API AdventureWorks corriendo correctamente."
+}
+```
+
+Esto confirma que el servidor Node.js está activo y que Postman puede comunicarse con la API.
+
+### Paso 66. Probar una consulta GET con Postman
+
+| Campo | Valor |
+|---|---|
+| Método | `GET` |
+| URL | `http://localhost:3000/api/clientes/territorio/1` |
+
+Respuesta esperada:
+
+```json
+[
+  {
+    "territorio": 1,
+    "cantidad_de_clientes": 3520
+  }
+]
+```
+
+Esta prueba comprueba el recorrido completo: Postman envía el GET, Express recibe la solicitud, obtiene el parámetro `territoryId`, Node.js se comunica con SQL Server, se ejecuta el Stored Procedure y la información regresa a Postman.
+
+### Paso 67. Probar una solicitud POST con Postman
+
+| Campo | Valor |
+|---|---|
+| Método | `POST` |
+| URL | `http://localhost:3000/api/departamentos` |
+| Body | `raw` → `JSON` |
+
+Cuerpo de la solicitud:
+
+```json
+{
+  "nombre": "Marketing",
+  "grupo": "Administracion"
+}
+```
+
+La API recibe estos datos mediante `req.body`, valida la información y ejecuta `sp_InsertarDepartamento`. Respuesta esperada:
+
+```json
+{
+  "mensaje": "Departamento registrado correctamente.",
+  "info": 0
+}
+```
+
+> 📌 **Nota:** el valor de `info` depende del valor de retorno proporcionado por el procedimiento almacenado.
+
+### Paso 68. Probar una solicitud PUT con Postman
+
+| Campo | Valor |
+|---|---|
+| Método | `PUT` |
+| URL | `http://localhost:3000/api/inventario` |
+| Body | `raw` → `JSON` |
+
+```json
+{
+  "productId": 1,
+  "locationId": 1,
+  "nuevaCantidad": 100
+}
+```
+
+Respuesta esperada:
+
+```json
+{
+  "mensaje": "Cantidad actualizada correctamente."
+}
+```
+
+Esta prueba permite comprobar visualmente la operación UPDATE que anteriormente se realizaba mediante `curl`.
+
+### Paso 69. Probar una solicitud DELETE con Postman
+
+| Campo | Valor |
+|---|---|
+| Método | `DELETE` |
+| URL | `http://localhost:3000/api/departamentos/Marketing` |
+
+No es necesario colocar información en Body, ya que el nombre del departamento se encuentra en la URL. Express lo recibe mediante `req.params.nombre` y ejecuta `sp_eliminardepartamento`. Respuesta esperada:
+
+```json
+{
+  "mensaje": "Departamento eliminado correctamente (si existia y no tenia dependencias)."
+}
+```
+
+> 📌 **Nota:** si existen dependencias en la base de datos que impiden eliminar el departamento, SQL Server puede devolver un error, dependiendo de las relaciones y restricciones existentes.
+
+### Paso 70. Probar las demás consultas de la API
+
+| Consulta | Método | URL |
+|---|---|---|
+| Personas por tipo | `GET` | `http://localhost:3000/api/personas/tipo/empleado` |
+| Reporte de Work Order | `GET` | `http://localhost:3000/api/workorder/reporte` |
+
+En ambos casos se selecciona el método GET, se coloca la dirección correspondiente y se presiona Send; Postman mostrará los resultados en formato JSON.
+
+### Paso 71. Organizar las pruebas en una colección de Postman
+
+Las solicitudes pueden guardarse y organizarse dentro de una **Collection**, por ejemplo `AdventureWorks API`:
+
+```text
+AdventureWorks API
+│
+├── GET  - API funcionando
+├── GET  - Clientes por territorio
+├── GET  - Personas por tipo
+├── GET  - Reporte Work Order
+├── POST - Insertar departamento
+├── PUT  - Actualizar inventario
+└── DELETE - Eliminar departamento
+```
+
+De esta manera, cada operación queda almacenada y puede ejecutarse nuevamente presionando Send, sin escribir de nuevo los comandos, y Postman permite visualizar claramente el método, la dirección, los parámetros, el cuerpo JSON enviado y la respuesta generada.
+
+### Paso 72. Verificación final utilizando Postman
+
+Como comprobación final, se repiten desde Postman las pruebas principales mientras la API continúa ejecutándose en WSL Ubuntu:
+
+| # | Operación | Método | URL / Body |
+|---|---|---|---|
+| 1 | Servidor activo | `GET` | `http://localhost:3000/` |
+| 2 | Clientes por territorio | `GET` | `http://localhost:3000/api/clientes/territorio/1` |
+| 3 | Insertar departamento | `POST` | `http://localhost:3000/api/departamentos` — `{"nombre":"Marketing","grupo":"Administracion"}` |
+| 4 | Actualizar inventario | `PUT` | `http://localhost:3000/api/inventario` — `{"productId":1,"locationId":1,"nuevaCantidad":100}` |
+| 5 | Personas por tipo | `GET` | `http://localhost:3000/api/personas/tipo/empleado` |
+| 6 | Reporte Work Order | `GET` | `http://localhost:3000/api/workorder/reporte` |
+| 7 | Eliminar departamento | `DELETE` | `http://localhost:3000/api/departamentos/Marketing` |
+
+```text
+POSTMAN
+   │  Solicitud HTTP
+   ▼
+NODE.JS + EXPRESS
+   │  Procesamiento de la solicitud
+   ▼
+SQL SERVER
+   │  Stored Procedure
+   ▼
+BASE DE DATOS
+   │  Resultado
+   ▼
+NODE.JS + EXPRESS
+   │  Respuesta JSON
+   ▼
+POSTMAN
+```
+
+Con esto, Postman queda como la herramienta utilizada para probar, visualizar y organizar el funcionamiento de la API AdventureWorks. La aplicación no sustituye al servidor ni a la base de datos, sino que actúa como cliente para enviar solicitudes y comprobar las respuestas generadas.
+
+Como resultado final, la API queda preparada para recibir solicitudes HTTP, comunicarse con SQL Server y ejecutar los procedimientos almacenados necesarios para las operaciones de inserción, actualización, eliminación y consulta.
