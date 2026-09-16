@@ -32,10 +32,6 @@ END
 
 
 GO
-EXECUTE sp_helptext 'dbo.sp_ActualizarCantidadInventarioUbicacion';
-
-
-GO
 EXECUTE sp_InsertarDepartamento @Nombre = 'Tecnologia', @Grupo = 'Administracion';
 
 
