@@ -22,7 +22,7 @@
 
 ---
 
-🔗 **Repositorio:** [Tarea-1_API_Adventure-Works](https://github.com/Alice-Arias/Tarea-1_API_Adventure-Works.-.git)
+🔗 **LINK VIDEO:** [Tarea-1_API_Adventure-Works](https://youtu.be/Mo3M7PXGPXc?si=Qx5568bILf2RbptI)
 
 </div>
 
